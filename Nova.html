@@ -9,6 +9,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: A comprehensive, multi-section single-page application designed for intuitive exploration. A sticky top navigation bar provides quick access to major sections: Overview, Use Case, Design, Mechanical, AI, Controls, Power, Components, and Functionality. This structure prioritizes a clear narrative flow (from concept to detailed implementation) while allowing users to jump to specific areas of interest. Interactive charts, clickable diagrams, and a filterable component list enhance engagement, making complex technical details digestible. The design aims to be visually appealing and user-friendly, reflecting the robot's purpose as a helpful assistant. -->
+    <!-- Visualization & Content Choices: 
+        - Key Specs (Payload, Runtime, Mobility): Report Info -> Top-level performance numbers. Goal -> Inform. Viz -> Stat cards. Interaction -> None. Justification -> High-impact summary for quick understanding. Library -> Tailwind.
+        - Actuator Forces (Arm vs Stabilizer): Report Info -> 1500N vs 900N force ratings. Goal -> Compare. Viz -> Bar Chart. Interaction -> Hover tooltips. Justification -> Clear visual comparison of component strength. Library -> Chart.js.
+        - AI Pipeline: Report Info -> The multi-stage AI workflow. Goal -> Organize/Explain Process. Viz -> Clickable flowchart diagram. Interaction -> Click a stage to expand details. Justification -> Deconstructs a complex process into an interactive learning tool. Library -> HTML/CSS/JS.
+        - Power Distribution: Report Info -> Battery voltage step-down hierarchy. Goal -> Show Proportions. Viz -> Donut Chart. Interaction -> Hover tooltips. Justification -> Clearly visualizes power allocation across subsystems. Library -> Chart.js.
+        - Battery Runtime vs. Load: Report Info -> Runtime estimates under different loads. Goal -> Show Relationship/Change. Viz -> Line Chart with buttons. Interaction -> User clicks a load type to see the projected runtime curve update. Justification -> Demonstrates the dynamic relationship between power consumption and operational time. Library -> Chart.js.
+        - Component List: Report Info -> Detailed parts list with quantities and prices. Goal -> Organize/Inform. Viz -> Interactive Table. Interaction -> Search/Filter. Justification -> Allows users to quickly find specific components and understand cost breakdown. Library -> HTML/CSS/JS.
+        - Robot Images: Report Info -> Visual representation of the robot. Goal -> Visualize. Viz -> Static images for overall design, conceptual interior views. Justification -> Provides visual context and showcases the robot's aesthetic and potential capabilities. Library -> HTML/CSS.
+        - Conceptual Videos/Images of Functionality: Report Info -> Demonstrations of robot capabilities. Goal -> Visualize. Viz -> Placeholder images/divs with descriptive text. Interaction -> None (conceptual). Justification -> Illustrates complex actions like hill climbing and internal views without requiring actual video/image generation. Library -> HTML/CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -65,6 +78,18 @@
             height: auto;
             display: block;
         }
+        .content-placeholder {
+            background-color: #E0E0E0;
+            color: #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -82,7 +107,7 @@
                     <a href="#controls" class="nav-link text-stone-600 font-medium">Controls</a>
                     <a href="#power" class="nav-link text-stone-600 font-medium">Power & Electronics</a>
                     <a href="#components" class="nav-link text-stone-600 font-medium">Components & Cost</a>
-                    <a href="#functionality" class="nav-link text-stone-600 font-medium">Functionality In Action</a>
+                    <a href="#future-vision" class="nav-link text-stone-600 font-medium">Future Vision</a>
                 </div>
                 <div class="md:hidden">
                     <button id="menu-btn" class="text-stone-700 focus:outline-none">
@@ -99,7 +124,7 @@
                  <a href="#controls" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Controls</a>
                  <a href="#power" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Power & Electronics</a>
                  <a href="#components" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Components & Cost</a>
-                 <a href="#functionality" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Functionality In Action</a>
+                 <a href="#future-vision" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Future Vision</a>
             </div>
         </nav>
     </header>
@@ -107,23 +132,23 @@
     <main>
         <section id="overview" class="container mx-auto px-6 py-16 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-stone-800 mb-4">Nova: Your Grandparents' Autonomous Assistant</h1>
-            <p class="text-lg text-stone-600 max-w-3xl mx-auto mb-12">Nova is an all-terrain robotic assistant designed to empower independent living by handling complex heavy-duty tasks, allowing your grandparents to relax. Imagine a robot that can climb a hill, interact with a smart dispenser, and bring back a freshly poured water bottle – all on command.</p>
+            <p class="text-lg text-stone-600 max-w-3xl mx-auto mb-12">Welcome to the future of independent living! Nova is not just a robot; it's a dedicated, all-terrain autonomous assistant meticulously engineered to empower your grandparents by effortlessly handling the most demanding heavy-duty tasks. Imagine a world where lifting heavy objects, navigating challenging outdoor environments, and even fetching a perfectly poured water bottle are all managed seamlessly by a reliable robotic companion. Nova is designed to enhance comfort, safety, and autonomy, allowing your loved ones to enjoy their golden years with unparalleled ease and peace of mind.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-stone-500 font-semibold mb-2">Max Payload</h3>
                     <p class="text-5xl font-bold text-orange-500">100<span class="text-3xl ml-1">kg</span></p>
-                    <p class="text-sm text-stone-500 mt-2">Via a 1500 N hydraulic arm</p>
+                    <p class="text-sm text-stone-500 mt-2">Via a robust 1500 N hydraulic arm, designed for heavy lifting.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-stone-500 font-semibold mb-2">Max Runtime</h3>
                     <p class="text-5xl font-bold text-orange-500">~14<span class="text-3xl ml-1">hrs</span></p>
-                    <p class="text-sm text-stone-500 mt-2">On 150 Ah LiFePO₄ battery (light load)</p>
+                    <p class="text-sm text-stone-500 mt-2">Extended operation on a high-capacity 150 Ah LiFePO₄ battery (under light load).</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-stone-500 font-semibold mb-2">Mobility</h3>
                     <p class="text-5xl font-bold text-orange-500">45°<span class="text-3xl ml-1">slope</span></p>
-                    <p class="text-sm text-stone-500 mt-2">All-terrain tracked chassis</p>
+                    <p class="text-sm text-stone-500 mt-2">Unmatched all-terrain capability with a rugged tracked chassis.</p>
                 </div>
             </div>
         </section>
@@ -131,32 +156,32 @@
         <section id="use-case" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-4">Complex Task Scenario: Automated Water Delivery</h2>
-                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova is designed to handle intricate multi-step tasks, freeing your loved ones from daily chores. Consider the scenario of fetching a water bottle from a remote dispenser:</p>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova excels at handling intricate, multi-step tasks, seamlessly integrating perception, planning, and precise execution to free your loved ones from daily burdens. Let's explore a detailed scenario: fetching a water bottle from a remote dispenser.</p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-stone-100 p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-3">1. Voice Command & Planning</h3>
-                        <p class="text-stone-700 text-sm">Grandparent says: "Nova, please bring me a water bottle from the dispenser." Nova processes the Telugu command, identifies the intent, and plans the optimal route to the known water dispenser location, which might be up a garden hill.</p>
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">1. Voice Command & Intelligent Planning</h3>
+                        <p class="text-stone-700 text-sm">The grandparent simply states: "Nova, please bring me a water bottle from the dispenser." Nova's advanced speech-to-text module instantly processes the Telugu command, understanding the intent. Its internal logic then formulates an optimal, energy-efficient route to the known water dispenser location, even if it involves traversing challenging outdoor terrain like a garden hill.</p>
                     </div>
                     <div class="bg-stone-100 p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-3">2. All-Terrain Navigation</h3>
-                        <p class="text-stone-700 text-sm">Nova autonomously navigates the terrain, utilizing its tracked chassis and terrain-stabilizing actuators to climb the $45^{\circ}$ hill. LiDAR and IMU SLAM ensure precise localization and obstacle avoidance even on uneven ground.</p>
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">2. Robust All-Terrain Navigation</h3>
+                        <p class="text-stone-700 text-sm">With its powerful tracked chassis and terrain-stabilizing actuators, Nova autonomously navigates the environment. Utilizing simultaneous localization and mapping (SLAM) from LiDAR and IMU data, it precisely tracks its position and avoids dynamic obstacles. Its adaptive control system ensures smooth ascent and descent on slopes up to $45^{\circ}$, maintaining stability even on uneven ground.</p>
                     </div>
                     <div class="bg-stone-100 p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-3">3. Smart Dispenser Interaction</h3>
-                        <p class="text-stone-700 text-sm">Upon reaching the dispenser, Nova's vision system identifies the dispenser's interface. Its hydraulic arm precisely extends to place a pre-programmed RFID card or activate a button, triggering the water pouring mechanism.</p>
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">3. Precise Smart Dispenser Interaction</h3>
+                        <p class="text-stone-700 text-sm">Upon arrival at the dispenser, Nova's high-resolution vision system, powered by YOLOv8, accurately identifies the dispenser's interface, buttons, or even an RFID reader. Its hydraulic arm, with fine-tuned motor control, extends with millimeter precision to either press a button or delicately place a pre-programmed RFID card, initiating the water pouring sequence.</p>
                     </div>
                     <div class="bg-stone-100 p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-3">4. Bottle Retrieval & Securing</h3>
-                        <p class="text-stone-700 text-sm">After the water pours into a designated bottle (perhaps one Nova carried or a fixed one at the dispenser), Nova's soft-padded gripper securely grasps the filled bottle, ensuring no spills.</p>
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">4. Secure Bottle Retrieval & Stowage</h3>
+                        <p class="text-stone-700 text-sm">Once the water has filled the designated bottle (either one Nova carried or a fixed bottle at the dispenser), Nova's soft-padded gripper gently but firmly grasps the filled container. It then carefully retracts and secures the bottle within its dedicated 40cm diameter internal cargo bay, preventing any spills or shifts during transit.</p>
                     </div>
                     <div class="bg-stone-100 p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-3">5. Safe Return & Delivery</h3>
-                        <p class="text-stone-700 text-sm">Nova then plans its return journey, carefully descending the hill and navigating back to the grandparent's location, using its internal memory to recall preferred delivery spots. It announces: "Your water is ready."</p>
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">5. Safe Return & Personalized Delivery</h3>
+                        <p class="text-stone-700 text-sm">Nova then calculates the most efficient return path, descending the hill with controlled precision and navigating back to the grandparent's current location. Leveraging its internal memory of user preferences, it delivers the water bottle to a pre-defined accessible spot, announcing clearly in Telugu: "Your water is ready."</p>
                     </div>
                     <div class="bg-stone-100 p-6 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-3">6. Contextual Learning</h3>
-                        <p class="text-stone-700 text-sm">The robot logs the successful task, updating its internal map with information about the dispenser and terrain conditions, improving its efficiency for future requests.</p>
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">6. Continuous Learning & Optimization</h3>
+                        <p class="text-stone-700 text-sm">After each successful task, Nova logs environmental data, terrain conditions, and interaction specifics. This data feeds into its learning algorithms, continuously refining its navigation, object interaction, and power management strategies, making it more efficient and reliable for all future requests.</p>
                     </div>
                 </div>
             </div>
@@ -165,41 +190,41 @@
         <section id="design" class="py-20">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-4">Robot Design & Aesthetics</h2>
-                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova's design balances robust functionality with an approachable aesthetic, ensuring it fits seamlessly into a home environment while tackling demanding tasks.</p>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova's design is a harmonious blend of industrial-grade durability and a friendly, non-intrusive aesthetic. Its robust structure is engineered for demanding tasks, while its smooth lines and compact form ensure it integrates seamlessly into any home or garden environment. Every design choice prioritizes both high performance and user comfort.</p>
                 
                 <div class="flex flex-col items-center space-y-12">
                     <div class="image-container">
-                        <img src="https://placehold.co/700x450/E0E0E0/333333?text=Nova+Robot+Exterior+View" alt="Nova Robot Exterior View" class="rounded-lg">
-                        <p class="text-center text-sm text-stone-500 mt-2">Overall exterior view of Nova, showcasing its tracked chassis and hydraulic arm.</p>
+                        <img src="https://github.com/SiddhardhaDev/Project-NOVA/raw/main/ChatGPT%20Image%20Jun%203%2C%202025%2C%2006_43_56%20PM.png" alt="Nova Robot Exterior View" class="rounded-lg">
+                        <p class="text-center text-sm text-stone-500 mt-2">A comprehensive exterior view of Nova, highlighting its robust tracked chassis and the versatile hydraulic arm in its resting position.</p>
                     </div>
-                    <p class="text-center text-stone-600 max-w-3xl mx-auto mt-8">Nova's compact yet powerful architecture is designed for optimal performance and maintainability. The exterior design emphasizes stability and maneuverability.</p>
+                    <p class="text-center text-stone-600 max-w-3xl mx-auto mt-8">The robot's compact yet powerful architecture is meticulously designed for optimal performance, ease of maintenance, and long-term reliability. The exterior emphasizes stability, maneuverability across diverse terrains, and an approachable appearance that makes it a welcome addition to any household.</p>
                 </div>
             </div>
         </section>
 
         <section id="mechanical" class="py-20 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-4">Mechanical Systems</h2>
-                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova’s physical structure is a blend of industrial robustness and home-friendly design. It features a high-torque tracked chassis for mobility and a powerful hydraulic arm for heavy lifting, all balanced by dynamic stabilizers, crucial for navigating varied home and garden environments.</p>
+                <h2 class="text-3xl font-bold text-center mb-4">Mechanical Systems: The Foundation of Nova's Strength</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova’s physical structure is a masterpiece of engineering, combining industrial-grade robustness with thoughtful design for home environments. It features a high-torque tracked chassis for unparalleled mobility and a powerful hydraulic arm for heavy lifting, all dynamically balanced by intelligent stabilizers. This ensures Nova can navigate varied home and garden environments, including steep inclines, with unwavering stability and precision.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div class="bg-stone-100 p-8 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4 text-stone-800">Key Components & Capabilities</h3>
+                        <h3 class="text-2xl font-semibold mb-4 text-stone-800">Key Components & Engineering Capabilities</h3>
                         <ul class="space-y-4">
                             <li class="flex items-start">
                                 <span class="text-orange-500 font-bold mr-3">●</span>
-                                <div><strong class="font-semibold text-stone-700">Chassis & Mobility:</strong> 40cm diameter aluminum base with four 250W brushless DC motors driving rubberized tracks. Engineered for climbing $45^{\circ}$ slopes and traversing low obstacles with ease.</div>
+                                <div><strong class="font-semibold text-stone-700">Chassis & All-Terrain Mobility:</strong> Built on a sturdy 40cm diameter aluminum base, Nova is propelled by four individually controlled 250W brushless DC motors. These motors drive custom-designed, rubberized tank tracks, engineered for superior traction and stability. This robust system allows Nova to effortlessly climb $45^{\circ}$ slopes, traverse rough terrain, and clear low obstacles with remarkable ease, ensuring access to all areas of a property.</div>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-orange-500 font-bold mr-3">●</span>
-                                <div><strong class="font-semibold text-stone-700">Hydraulic Arm:</strong> A 1500N linear actuator capable of lifting 100 kg up to 2m. The soft-padded gripper is designed for both heavy water bottles and delicate interaction like card placement.</div>
+                                <div><strong class="font-semibold text-stone-700">High-Capacity Hydraulic Arm:</strong> The core of Nova's lifting prowess is a powerful 1500N linear hydraulic actuator. This arm is capable of lifting substantial payloads up to 100 kg (equivalent to over 220 lbs) and extending to a reach of 2 meters. Its soft-padded gripper is meticulously designed to handle both heavy items like large water bottles and delicate interactions, such as precisely placing an RFID card or activating a small button.</div>
                             </li>
                              <li class="flex items-start">
                                 <span class="text-orange-500 font-bold mr-3">●</span>
-                                <div><strong class="font-semibold text-stone-700">Stabilizers:</strong> Four 900N linear actuators dynamically extend to counterbalance loads and level the chassis, ensuring stability on uneven terrain and during heavy lifts.</div>
+                                <div><strong class="font-semibold text-stone-700">Dynamic Stabilization System:</strong> Four strategically placed 900N linear actuators function as dynamic stabilizers. These actuators intelligently extend and retract to continuously adjust Nova's center of gravity, counterbalancing heavy loads and actively leveling the chassis. This critical system ensures unwavering stability on uneven terrain, during steep ascents or descents, and throughout the precise movements of the hydraulic arm.</div>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-orange-500 font-bold mr-3">●</span>
-                                <div><strong class="font-semibold text-stone-700">Internal Cargo Bay:</strong> A 40cm diameter bay designed to securely stow a 20L water bottle or equivalent payload.</div>
+                                <div><strong class="font-semibold text-stone-700">Integrated Internal Cargo Bay:</strong> A spacious 40cm diameter internal cargo bay is seamlessly integrated into Nova's design. This secure compartment is perfectly sized to stow a standard 20L water bottle or an equivalent payload, keeping items safe and stable during transport across any terrain.</div>
                             </li>
                         </ul>
                     </div>
@@ -208,6 +233,7 @@
                         <div class="chart-container">
                             <canvas id="actuatorChart"></canvas>
                         </div>
+                        <p class="text-center text-sm text-stone-600 mt-4">A clear visualization of the maximum force output capabilities of Nova's primary hydraulic arm versus its stabilizing actuators, demonstrating their respective strengths.</p>
                     </div>
                 </div>
             </div>
@@ -215,33 +241,33 @@
 
         <section id="ai-pipeline" class="py-20">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-4">AI & Perception Pipeline</h2>
-                 <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova's intelligence stems from a modular AI stack running on an NVIDIA Jetson Orin NX. Its primary language for interaction is **Telugu**, ensuring seamless communication with your grandparents. This pipeline processes sensor data to understand its environment, interpret complex commands, and respond intelligently, enabling tasks like smart dispenser interaction.</p>
+                <h2 class="text-3xl font-bold text-center mb-4">AI & Perception Pipeline: Nova's Intelligent Core</h2>
+                 <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova's intelligence is powered by a sophisticated, modular AI stack, leveraging the high-performance NVIDIA Jetson Orin NX. Its primary language for natural interaction is **Telugu**, ensuring seamless and intuitive communication with your grandparents. This comprehensive pipeline processes vast amounts of sensor data in real-time to understand its environment, interpret complex commands, and respond intelligently, enabling advanced tasks like precise smart dispenser interaction and safe navigation.</p>
                 <div class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center font-semibold">
-                        <div id="stage-perception" class="ai-pipeline-stage bg-white p-6 rounded-lg shadow-md">Perception</div>
+                        <div id="stage-perception" class="ai-pipeline-stage bg-white p-6 rounded-lg shadow-md">Perception Module</div>
                         <div class="flex items-center justify-center text-2xl text-stone-400">→</div>
-                        <div id="stage-language" class="ai-pipeline-stage bg-white p-6 rounded-lg shadow-md">Language & Logic</div>
+                        <div id="stage-language" class="ai-pipeline-stage bg-white p-6 rounded-lg shadow-md">Language & Logic Module</div>
                     </div>
                     
                     <div id="details-perception" class="ai-details bg-white rounded-lg shadow-inner">
-                        <h4 class="font-bold text-lg mb-2 text-stone-800">Perception Module</h4>
-                        <p class="text-sm text-stone-600 mb-4">This module is Nova's "eyes and ears," converting raw sensor data into meaningful information about the world, crucial for navigating diverse environments and interacting with objects like a water dispenser.</p>
+                        <h4 class="font-bold text-lg mb-2 text-stone-800">Perception Module: Nova's Eyes and Spatial Awareness</h4>
+                        <p class="text-sm text-stone-600 mb-4">This module is Nova's "eyes and ears," converting raw sensor data into rich, actionable information about the world. It's crucial for enabling Nova to navigate diverse environments, identify objects, and interact precisely with its surroundings, such as a water dispenser.</p>
                         <ul class="list-disc pl-5 space-y-2 text-stone-700">
-                            <li><strong>Object Detection:</strong> Uses a <strong class="font-semibold">YOLOv8</strong> model, accelerated by TensorRT, to identify objects like water bottles, furniture, and even specific dispenser interfaces from a 4K camera feed in real-time.</li>
-                            <li><strong>Label Reading (OCR):</strong> Detected objects are cropped and passed to <strong class="font-semibold">PaddleOCR</strong> to read text on labels (e.g., dispenser instructions) or even recognize specific cards for interaction.</li>
-                            <li><strong>Mapping (SLAM):</strong> Fuses data from LiDAR and an IMU to build a 3D map of its environment, allowing for autonomous navigation to known locations (like the water dispenser) and precise localization on varied terrain, including hills.</li>
+                            <li><strong>Object Detection (YOLOv8):</strong> Nova utilizes a highly optimized <strong class="font-semibold">YOLOv8</strong> deep learning model, accelerated by NVIDIA's TensorRT. This allows for real-time identification of objects like water bottles, furniture, obstacles, and even specific components of a dispenser interface from a high-resolution 4K camera feed. Its robust detection ensures Nova can reliably locate and categorize items in varied lighting and environmental conditions.</li>
+                            <li><strong>Label Reading (PaddleOCR):</strong> For tasks requiring textual understanding, detected objects are intelligently cropped and fed into <strong class="font-semibold">PaddleOCR</strong>. This powerful Optical Character Recognition (OCR) system enables Nova to read text on labels, identify specific dispenser instructions, or even recognize unique RFID card details, facilitating autonomous interaction with smart appliances.</li>
+                            <li><strong>Simultaneous Localization and Mapping (SLAM):</strong> Nova builds a dynamic 3D map of its environment and simultaneously tracks its own position within that map. This is achieved by fusing data from a high-precision LiDAR sensor and an Inertial Measurement Unit (IMU) using advanced algorithms. This robust SLAM capability ensures precise localization and obstacle avoidance, allowing Nova to navigate autonomously to known locations (like the water dispenser) and maintain situational awareness even on complex and uneven terrain, including steep hills.</li>
                         </ul>
                     </div>
                     
                     <div id="details-language" class="ai-details bg-white rounded-lg shadow-inner">
-                        <h4 class="font-bold text-lg mb-2 text-stone-800">Language & Logic Module</h4>
-                        <p class="text-sm text-stone-600 mb-4">This module interprets human intent and translates it into actions, enabling natural interaction and complex task execution for the grandparent assistant.</p>
+                        <h4 class="font-bold text-lg mb-2 text-stone-800">Language & Logic Module: Understanding and Responding</h4>
+                        <p class="text-sm text-stone-600 mb-4">This module is the brain behind Nova's natural interaction and complex task execution. It interprets human intent from spoken commands and translates them into a sequence of robotic actions, providing clear and helpful feedback to the grandparent.</p>
                         <ul class="list-disc pl-5 space-y-2 text-stone-700">
-                           <li><strong>Speech-to-Text (STT):</strong> An offline <strong class="font-semibold">Vosk ASR</strong> model recognizes voice commands in Telugu, allowing grandparents to give commands without needing internet access.</li>
-                           <li><strong>Natural Language Processing (NLP):</strong> A fine-tuned <strong class="font-semibold">TeluguBERT</strong> model parses the recognized text to classify user intent (e.g., "fetch water," "emergency stop") and extract parameters like "from the dispenser" or "place the card."</li>
-                           <li><strong>Text-to-Speech (TTS):</strong> Uses <strong class="font-semibold">Coqui TTS</strong> or eSpeak to generate synthesized Telugu speech for responses and confirmations, providing clear feedback to the user.</li>
-                           <li><strong>Decision Logic:</strong> A high-level task scheduler in ROS2 receives the parsed command and orchestrates the required actions, from planning a path to controlling the arm for precise dispenser interaction.</li>
+                           <li><strong>Speech-to-Text (Vosk ASR):</strong> An efficient, offline <strong class="font-semibold">Vosk ASR</strong> (Automatic Speech Recognition) model is integrated to recognize voice commands spoken in Telugu. This crucial feature enables grandparents to interact with Nova naturally and effortlessly, without requiring an internet connection, ensuring privacy and reliability.</li>
+                           <li><strong>Natural Language Processing (TeluguBERT):</strong> The recognized text from the STT module is then processed by a fine-tuned <strong class="font-semibold">TeluguBERT</strong> model. This advanced Natural Language Processing (NLP) system accurately parses the command, classifying the user's intent (e.g., "fetch water," "emergency stop," "go to kitchen") and extracting relevant parameters (e.g., "from the dispenser," "place the card").</li>
+                           <li><strong>Text-to-Speech (Coqui TTS / eSpeak):</strong> To provide clear and natural auditory feedback, Nova uses either <strong class="font-semibold">Coqui TTS</strong> or eSpeak to generate synthesized Telugu speech for responses, confirmations, and status updates. This ensures that grandparents receive immediate and understandable communication from their robotic assistant.</li>
+                           <li><strong>Decision Logic & ROS2 Orchestration:</strong> A high-level task scheduler, running within the Robot Operating System 2 (ROS2) framework, receives the parsed command and orchestrates the entire sequence of actions. This intelligent decision logic coordinates all subsystems, from planning a precise path and controlling the hydraulic arm for dispenser interaction to managing power consumption and ensuring safe navigation.</li>
                         </ul>
                     </div>
                 </div>
@@ -250,31 +276,31 @@
 
         <section id="controls" class="py-20 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-4">Control Systems & Navigation</h2>
-                 <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Advanced control theory ensures Nova moves smoothly and safely, especially under heavy loads and on challenging terrain like hills. It fuses data from multiple sensors for robust localization and precise navigation, essential for complex tasks like dispenser interaction.</p>
+                <h2 class="text-3xl font-bold text-center mb-4">Control Systems & Navigation: Precision and Stability</h2>
+                 <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova's sophisticated control systems are the backbone of its smooth, safe, and precise operation, especially when navigating challenging terrain under heavy loads. By fusing data from multiple sensors, Nova achieves robust localization and unwavering stability, essential for executing complex tasks like fetching water or traversing a steep, rocky hill.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div>
-                         <h3 class="text-2xl font-semibold mb-4 text-stone-800">Core Control Principles</h3>
+                         <h3 class="text-2xl font-semibold mb-4 text-stone-800">Core Control Principles & Adaptive Behavior</h3>
                         <ul class="space-y-3">
-                            <li><strong class="font-semibold">PID & Adaptive Control:</strong> Each motor and actuator uses a PID controller for precise position and speed. The system dynamically adapts to heavy loads and changing terrain (e.g., hill climbing) by monitoring current draw and adjusting gains, ensuring smooth and stable motion.</li>
-                            <li><strong class="font-semibold">Load Balancing & Stability:</strong> When the arm extends with a heavy payload (like a full water bottle) or on an incline, the IMU detects any tilt. The stabilizer actuators automatically extend and retract to shift the center of gravity and prevent tipping, maintaining equilibrium on slopes.</li>
-                            <li><strong class="font-semibold">ROS2 Runtime:</strong> All software modules run as nodes in a ROS2 environment. This provides robust, real-time messaging, scheduling, and fault tolerance for the entire system, crucial for coordinating complex multi-step tasks.</li>
-                            <li><strong class="font-semibold">Terrain Response:</strong> Nova adjusts its behavior based on ground contact and incline. If the IMU senses a steep slope, the speed of the tracks is reduced to maintain optimal traction and prevent slipping.</li>
+                            <li><strong class="font-semibold">PID & Adaptive Control:</strong> Every motor and actuator on Nova is governed by a finely tuned PID (Proportional-Integral-Derivative) controller, ensuring precise position, speed, and force control. Crucially, the system dynamically adapts to varying conditions, such as heavy loads or changing terrain (e.g., climbing a steep hill). By continuously monitoring current draw and sensor feedback, Nova adjusts its control gains in real-time, guaranteeing smooth, stable, and efficient motion regardless of the challenge.</li>
+                            <li><strong class="font-semibold">Dynamic Load Balancing & Stability:</strong> When Nova's hydraulic arm extends with a heavy payload (like a full 20L water bottle) or when the robot encounters an incline, the integrated IMU (Inertial Measurement Unit) immediately detects any shift in tilt or balance. The four stabilizer actuators then automatically and precisely extend or retract to actively shift the robot's center of gravity. This dynamic load balancing system prevents tipping, maintains optimal traction, and ensures unwavering equilibrium even on the most uneven surfaces.</li>
+                            <li><strong class="font-semibold">ROS2 Runtime & Orchestration:</strong> All of Nova's software modules operate as interconnected nodes within a robust Robot Operating System 2 (ROS2) environment. This framework provides real-time messaging, efficient task scheduling, and critical fault tolerance for the entire system. ROS2 is instrumental in coordinating the complex interplay between perception, planning, and execution, enabling Nova to perform multi-step tasks seamlessly and reliably.</li>
+                            <li><strong class="font-semibold">Intelligent Terrain Response:</strong> Nova continuously assesses its ground contact and the steepness of the incline. If the IMU senses a particularly steep slope or unstable ground, the control system intelligently reduces the speed of the tracked chassis. This adaptive response maintains optimal traction, prevents slipping, and ensures a safe and controlled ascent or descent, even on challenging rocky hillsides.</li>
                         </ul>
                     </div>
                     <div class="bg-stone-100 p-8 rounded-lg text-center">
-                        <h3 class="text-xl font-semibold mb-4">Sensor Fusion with Kalman Filter</h3>
-                        <p class="text-sm text-stone-600 mb-4">For robust SLAM and localization, Nova combines asynchronous data streams using an Extended Kalman Filter (EKF). This ensures accurate position tracking even when individual sensors might be unreliable.</p>
+                        <h3 class="text-xl font-semibold mb-4">Sensor Fusion with Extended Kalman Filter (EKF)</h3>
+                        <p class="text-sm text-stone-600 mb-4">For unparalleled robust SLAM (Simultaneous Localization and Mapping) and precise localization, Nova employs an Extended Kalman Filter (EKF). This advanced algorithm intelligently combines asynchronous data streams from various sensors, ensuring highly accurate position tracking even when individual sensor readings might be noisy or intermittently unreliable.</p>
                         <div class="space-y-2">
-                            <div class="bg-white p-3 rounded shadow">LiDAR Scans</div>
-                            <div class="text-xl">+</div>
-                            <div class="bg-white p-3 rounded shadow">IMU Data (Orientation)</div>
-                             <div class="text-xl">+</div>
-                            <div class="bg-white p-3 rounded shadow">Wheel Odometry (Position)</div>
+                            <div class="bg-white p-3 rounded shadow">LiDAR Scans (Precise Distance Mapping)</div>
+                            <div class="text-xl font-bold text-orange-500">+</div>
+                            <div class="bg-white p-3 rounded shadow">IMU Data (Accurate Orientation & Acceleration)</div>
+                             <div class="text-xl font-bold text-orange-500">+</div>
+                            <div class="bg-white p-3 rounded shadow">Wheel Odometry (Relative Position & Speed)</div>
                              <div class="my-3 text-2xl font-bold text-orange-500">↓</div>
                             <div class="bg-orange-500 text-white font-bold p-4 rounded-lg shadow-lg">Extended Kalman Filter (EKF)</div>
                              <div class="my-3 text-2xl font-bold text-orange-500">↓</div>
-                            <div class="bg-stone-800 text-white p-3 rounded shadow-md">Accurate Robot Pose (x, y, θ)</div>
+                            <div class="bg-stone-800 text-white p-3 rounded shadow-md">Highly Accurate Robot Pose (x, y, θ, velocity)</div>
                         </div>
                     </div>
                 </div>
@@ -283,18 +309,18 @@
 
         <section id="power" class="py-20">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-4">Power & Electronics</h2>
-                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">A robust power system is critical for safely delivering high currents for lifting and providing long runtimes, especially for extended tasks like fetching water from a distant dispenser. Nova uses a high-capacity LiFePO₄ battery and a custom Power Distribution Board (PDB) with multiple safety features.</p>
+                <h2 class="text-3xl font-bold text-center mb-4">Power & Electronics: The Lifeblood of Nova</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">A meticulously designed and robust power system is absolutely critical for Nova's safe, reliable, and extended operation. It ensures the consistent delivery of high currents for demanding tasks like heavy lifting and provides long runtimes for fetching water from distant locations. Nova achieves this with a high-capacity LiFePO₄ battery, a custom Power Distribution Board (PDB), and multiple layers of integrated safety features.</p>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                      <div>
-                        <h3 class="text-2xl font-semibold text-center mb-4 text-stone-800">Power Distribution</h3>
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-stone-800">Efficient Power Distribution Hierarchy</h3>
                         <div class="chart-container mx-auto">
                             <canvas id="powerChart"></canvas>
                         </div>
-                        <p class="text-center text-sm text-stone-600 mt-4">The main 24V battery power is efficiently stepped down to different voltage rails for various subsystems, ensuring stable and reliable power delivery.</p>
+                        <p class="text-center text-sm text-stone-600 mt-4">The primary 24V battery power is efficiently stepped down and distributed across various voltage rails, ensuring stable and reliable power delivery tailored to the specific needs of each subsystem, from high-power motors to sensitive microcontrollers.</p>
                      </div>
                      <div>
-                        <h3 class="text-2xl font-semibold text-center mb-4 text-stone-800">Battery Performance vs. Load</h3>
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-stone-800">Battery Performance vs. Operational Load</h3>
                          <div class="chart-container mx-auto">
                             <canvas id="batteryChart"></canvas>
                         </div>
@@ -302,17 +328,17 @@
                             <button id="lightLoadBtn" class="bg-orange-500 text-white px-4 py-2 rounded-lg shadow hover:bg-orange-600 transition">Light Load</button>
                             <button id="heavyLoadBtn" class="bg-stone-700 text-white px-4 py-2 rounded-lg shadow hover:bg-stone-800 transition">Heavy Load</button>
                         </div>
-                        <p class="text-center text-sm text-stone-600 mt-4">Understanding how different operational loads impact battery life is crucial for planning tasks and ensuring Nova can complete its duties without interruption.</p>
+                        <p class="text-center text-sm text-stone-600 mt-4">Understanding how different operational loads (e.g., idle vs. heavy lifting and climbing) impact battery life is crucial for mission planning and ensuring Nova can complete its duties without interruption. The chart illustrates estimated battery drain under different scenarios.</p>
                     </div>
                 </div>
                 <div class="mt-16 bg-stone-100 p-8 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold mb-4 text-stone-800">Key Power & Electronic Features</h3>
                     <ul class="space-y-3 text-stone-700">
-                        <li><strong class="font-semibold">LiFePO₄ Battery:</strong> A 150 Ah, 24V custom pack chosen for its high cycle life, thermal stability, and safety, providing up to 14 hours of operation.</li>
-                        <li><strong class="font-semibold">Smart BMS:</strong> Monitors cell voltages, currents, and temperatures, with an emergency contactor for immediate power cut-off on fault.</li>
-                        <li><strong class="font-semibold">Dual-Redundant Power Rails:</strong> Critical circuits (motors, arm) are fed by parallel 24V rails to prevent single-point failures.</li>
-                        <li><strong class="font-semibold">Custom 4-Layer PCB:</strong> Integrates regulators, connectors, and microcontrollers with isolated analog/digital grounds and enhanced creepage distances for safety.</li>
-                        <li><strong class="font-semibold">Microcontroller Co-processing:</strong> STM32 and ESP32 handle time-critical I/O and networking, offloading the Jetson Orin NX.</li>
+                        <li><strong class="font-semibold">High-Capacity LiFePO₄ Battery (24V 150Ah):</strong> Nova is powered by a custom-built 24V, 150 Amp-hour (Ah) Lithium Iron Phosphate (LiFePO₄) battery pack. This choice is deliberate, offering superior benefits over other battery chemistries, including an exceptionally high cycle life (thousands of charge/discharge cycles), excellent thermal stability (reducing fire risk), and inherent safety, providing up to 14 hours of continuous operation under typical light loads.</li>
+                        <li><strong class="font-semibold">Advanced Smart Battery Management System (BMS):</strong> An intelligent BMS continuously monitors critical battery parameters including individual cell voltages, overall current draw, and temperature. In the event of any detected fault (e.g., overcharge, over-discharge, over-current, short circuit, or extreme temperature), the BMS features an emergency contactor for immediate and safe power cut-off, protecting both the robot and its environment.</li>
+                        <li><strong class="font-semibold">Dual-Redundant Power Rails:</strong> To ensure maximum reliability and prevent single-point failures, critical circuits such as the powerful drive motors and the hydraulic arm are fed by parallel 24V power rails. This redundancy means that if one power path experiences an issue, the other can maintain operation, enhancing Nova's resilience.</li>
+                        <li><strong class="font-semibold">Custom 4-Layer Power Distribution Board (PCB):</strong> The heart of Nova's electronics is a custom-designed 4-layer Printed Circuit Board. This sophisticated PCB integrates all voltage regulators, connectors, and microcontrollers. It features carefully designed isolated analog and digital grounds to minimize noise and enhanced creepage distances between high-voltage traces for superior electrical safety and reliability.</li>
+                        <li><strong class="font-semibold">Distributed Microcontroller Co-processing:</strong> Time-critical I/O operations, sensor interfacing, and network communication are offloaded from the main NVIDIA Jetson Orin NX processor to dedicated microcontrollers like the STM32 and ESP32. This distributed processing architecture ensures that the Jetson can dedicate its full power to complex AI computations, while the microcontrollers handle low-latency, real-time control tasks and robust wireless communication (Wi-Fi and Bluetooth).</li>
                     </ul>
                 </div>
             </div>
@@ -321,7 +347,7 @@
         <section id="components" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-4">Component Breakdown & Estimated Cost</h2>
-                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">This section provides a detailed list of the key components required for Nova's construction, along with their estimated prices in Indian Rupees (INR). This gives a transparent view of the hardware investment for building such an advanced assistant.</p>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">This section provides a transparent and detailed list of the essential components required for Nova's construction, along with their estimated prices in Indian Rupees (INR). This breakdown offers a clear view of the hardware investment and the advanced technologies integrated into building such a sophisticated autonomous assistant.</p>
                 
                 <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
                     <div class="mb-4">
@@ -339,7 +365,8 @@
                                 </tr>
                             </thead>
                             <tbody id="componentTableBody" class="bg-white divide-y divide-stone-200">
-                                </tbody>
+                                <!-- Data will be injected here by JavaScript -->
+                            </tbody>
                         </table>
                     </div>
                     <div class="mt-6 text-right text-lg font-bold text-stone-800">
@@ -349,15 +376,35 @@
             </div>
         </section>
 
-        <section id="functionality" class="py-20">
+        <section id="future-vision" class="py-20">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-4">Nova in Action</h2>
-                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">See Nova's design come to life in a real-world scenario, demonstrating its ability to handle complex tasks.</p>
+                <h2 class="text-3xl font-bold text-center mb-4">Future Vision: The Evolution of Nova</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova represents a significant leap forward in autonomous assistance, but its potential extends far beyond its current capabilities. We envision a future where Nova continuously evolves, integrating new technologies and expanding its role to further enhance independent living and provide even greater support.</p>
                 
-                <div class="flex justify-center max-w-4xl mx-auto">
-                    <div class="image-container">
-                        <img src="https://placehold.co/700x450/E0E0E0/333333?text=Nova+Robot+Functioning+Image+Here" alt="Nova Robot Functioning" class="rounded-lg">
-                        <p class="text-center text-sm text-stone-500 mt-2">Nova demonstrating its heavy-lift capability by transporting a water bottle.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">Enhanced Dexterity & Fine Manipulation</h3>
+                        <p class="text-stone-700 text-sm">Future iterations could feature a multi-jointed, more dexterous robotic arm with a wider range of motion and finer manipulation capabilities. This would allow Nova to perform even more intricate tasks, such as opening specific types of containers, handling delicate objects, or assisting with personal care activities.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">Advanced Social & Emotional Intelligence</h3>
+                        <p class="text-stone-700 text-sm">Integrating more sophisticated emotional AI could enable Nova to understand and respond to human emotions, offering companionship, detecting distress, and providing proactive assistance. This would transform Nova from a task-oriented robot into a truly empathetic companion.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">Modular Attachments & Customization</h3>
+                        <p class="text-stone-700 text-sm">A modular design philosophy could allow users to easily swap out or add specialized attachments. Imagine a gardening module for watering plants, a cleaning module for light tidying, or a specialized medical delivery module, making Nova highly adaptable to individual needs.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">Extended Range & Swarm Robotics</h3>
+                        <p class="text-stone-700 text-sm">For larger properties or community assistance, Nova could operate within a network of other autonomous units. This "swarm robotics" approach would enable collaborative task execution, covering wider areas, and providing comprehensive support across multiple households or a small community.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">Integration with Smart Home Ecosystems</h3>
+                        <p class="text-stone-700 text-sm">Seamless integration with existing smart home devices and IoT platforms would allow Nova to control lights, thermostats, security systems, and other smart appliances, creating a fully interconnected and responsive living environment tailored to the grandparent's preferences.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">Self-Charging & Maintenance</h3>
+                        <p class="text-stone-700 text-sm">Future advancements could include autonomous self-charging capabilities, allowing Nova to return to a charging dock when low on power. Additionally, predictive maintenance features could alert users to potential issues before they become critical, ensuring continuous operation and minimal downtime.</p>
                     </div>
                 </div>
             </div>
