@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Grandparent Assistant Robot | Interactive System Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4; /* stone-100 */
+            color: #44403C; /* stone-700 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px;
+            height: 320px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #F97316; /* orange-500 */
+        }
+        .ai-pipeline-stage {
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .ai-pipeline-stage:hover {
+            transform: translateY(-4px);
+            background-color: #FEF3C7; /* amber-100 */
+        }
+        .ai-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding: 0 1.5rem;
+        }
+        .ai-details.open {
+            max-height: 500px; /* Adjust as needed */
+            padding: 1.5rem;
+        }
+        .image-container {
+            width: 100%;
+            max-width: 700px; /* Adjust as needed for image size */
+            margin: 0 auto;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#overview" class="text-xl font-bold text-stone-800">Nova Grandparent Assistant</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link text-stone-600 font-medium">Overview</a>
+                    <a href="#use-case" class="nav-link text-stone-600 font-medium">Use Case</a>
+                    <a href="#design" class="nav-link text-stone-600 font-medium">Design</a>
+                    <a href="#mechanical" class="nav-link text-stone-600 font-medium">Mechanical</a>
+                    <a href="#ai-pipeline" class="nav-link text-stone-600 font-medium">AI Pipeline</a>
+                    <a href="#controls" class="nav-link text-stone-600 font-medium">Controls</a>
+                    <a href="#power" class="nav-link text-stone-600 font-medium">Power & Electronics</a>
+                    <a href="#components" class="nav-link text-stone-600 font-medium">Components & Cost</a>
+                    <a href="#functionality" class="nav-link text-stone-600 font-medium">Functionality In Action</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-stone-700 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                 <a href="#overview" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Overview</a>
+                 <a href="#use-case" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Use Case</a>
+                 <a href="#design" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Design</a>
+                 <a href="#mechanical" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Mechanical</a>
+                 <a href="#ai-pipeline" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">AI Pipeline</a>
+                 <a href="#controls" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Controls</a>
+                 <a href="#power" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Power & Electronics</a>
+                 <a href="#components" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Components & Cost</a>
+                 <a href="#functionality" class="block py-2 px-4 text-sm text-stone-600 hover:bg-stone-200 rounded">Functionality In Action</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="overview" class="container mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-stone-800 mb-4">Nova: Your Grandparents' Autonomous Assistant</h1>
+            <p class="text-lg text-stone-600 max-w-3xl mx-auto mb-12">Nova is an all-terrain robotic assistant designed to empower independent living by handling complex heavy-duty tasks, allowing your grandparents to relax. Imagine a robot that can climb a hill, interact with a smart dispenser, and bring back a freshly poured water bottle – all on command.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-stone-500 font-semibold mb-2">Max Payload</h3>
+                    <p class="text-5xl font-bold text-orange-500">100<span class="text-3xl ml-1">kg</span></p>
+                    <p class="text-sm text-stone-500 mt-2">Via a 1500 N hydraulic arm</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-stone-500 font-semibold mb-2">Max Runtime</h3>
+                    <p class="text-5xl font-bold text-orange-500">~14<span class="text-3xl ml-1">hrs</span></p>
+                    <p class="text-sm text-stone-500 mt-2">On 150 Ah LiFePO₄ battery (light load)</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-stone-500 font-semibold mb-2">Mobility</h3>
+                    <p class="text-5xl font-bold text-orange-500">45°<span class="text-3xl ml-1">slope</span></p>
+                    <p class="text-sm text-stone-500 mt-2">All-terrain tracked chassis</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="use-case" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Complex Task Scenario: Automated Water Delivery</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova is designed to handle intricate multi-step tasks, freeing your loved ones from daily chores. Consider the scenario of fetching a water bottle from a remote dispenser:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">1. Voice Command & Planning</h3>
+                        <p class="text-stone-700 text-sm">Grandparent says: "Nova, please bring me a water bottle from the dispenser." Nova processes the Telugu command, identifies the intent, and plans the optimal route to the known water dispenser location, which might be up a garden hill.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">2. All-Terrain Navigation</h3>
+                        <p class="text-stone-700 text-sm">Nova autonomously navigates the terrain, utilizing its tracked chassis and terrain-stabilizing actuators to climb the $45^{\circ}$ hill. LiDAR and IMU SLAM ensure precise localization and obstacle avoidance even on uneven ground.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">3. Smart Dispenser Interaction</h3>
+                        <p class="text-stone-700 text-sm">Upon reaching the dispenser, Nova's vision system identifies the dispenser's interface. Its hydraulic arm precisely extends to place a pre-programmed RFID card or activate a button, triggering the water pouring mechanism.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">4. Bottle Retrieval & Securing</h3>
+                        <p class="text-stone-700 text-sm">After the water pours into a designated bottle (perhaps one Nova carried or a fixed one at the dispenser), Nova's soft-padded gripper securely grasps the filled bottle, ensuring no spills.</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">5. Safe Return & Delivery</h3>
+                        <p class="text-stone-700 text-sm">Nova then plans its return journey, carefully descending the hill and navigating back to the grandparent's location, using its internal memory to recall preferred delivery spots. It announces: "Your water is ready."</p>
+                    </div>
+                    <div class="bg-stone-100 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-stone-800 mb-3">6. Contextual Learning</h3>
+                        <p class="text-stone-700 text-sm">The robot logs the successful task, updating its internal map with information about the dispenser and terrain conditions, improving its efficiency for future requests.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="design" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Robot Design & Aesthetics</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova's design balances robust functionality with an approachable aesthetic, ensuring it fits seamlessly into a home environment while tackling demanding tasks.</p>
+                
+                <div class="flex flex-col items-center space-y-12">
+                    <div class="image-container">
+                        <img src="https://placehold.co/700x450/E0E0E0/333333?text=Nova+Robot+Exterior+View" alt="Nova Robot Exterior View" class="rounded-lg">
+                        <p class="text-center text-sm text-stone-500 mt-2">Overall exterior view of Nova, showcasing its tracked chassis and hydraulic arm.</p>
+                    </div>
+                    <p class="text-center text-stone-600 max-w-3xl mx-auto mt-8">Nova's compact yet powerful architecture is designed for optimal performance and maintainability. The exterior design emphasizes stability and maneuverability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="mechanical" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Mechanical Systems</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova’s physical structure is a blend of industrial robustness and home-friendly design. It features a high-torque tracked chassis for mobility and a powerful hydraulic arm for heavy lifting, all balanced by dynamic stabilizers, crucial for navigating varied home and garden environments.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="bg-stone-100 p-8 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-4 text-stone-800">Key Components & Capabilities</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-orange-500 font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Chassis & Mobility:</strong> 40cm diameter aluminum base with four 250W brushless DC motors driving rubberized tracks. Engineered for climbing $45^{\circ}$ slopes and traversing low obstacles with ease.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-orange-500 font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Hydraulic Arm:</strong> A 1500N linear actuator capable of lifting 100 kg up to 2m. The soft-padded gripper is designed for both heavy water bottles and delicate interaction like card placement.</div>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-orange-500 font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Stabilizers:</strong> Four 900N linear actuators dynamically extend to counterbalance loads and level the chassis, ensuring stability on uneven terrain and during heavy lifts.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-orange-500 font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Internal Cargo Bay:</strong> A 40cm diameter bay designed to securely stow a 20L water bottle or equivalent payload.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-stone-800">Actuator Force Comparison</h3>
+                        <div class="chart-container">
+                            <canvas id="actuatorChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-pipeline" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">AI & Perception Pipeline</h2>
+                 <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Nova's intelligence stems from a modular AI stack running on an NVIDIA Jetson Orin NX. Its primary language for interaction is **Telugu**, ensuring seamless communication with your grandparents. This pipeline processes sensor data to understand its environment, interpret complex commands, and respond intelligently, enabling tasks like smart dispenser interaction.</p>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center font-semibold">
+                        <div id="stage-perception" class="ai-pipeline-stage bg-white p-6 rounded-lg shadow-md">Perception</div>
+                        <div class="flex items-center justify-center text-2xl text-stone-400">→</div>
+                        <div id="stage-language" class="ai-pipeline-stage bg-white p-6 rounded-lg shadow-md">Language & Logic</div>
+                    </div>
+                    
+                    <div id="details-perception" class="ai-details bg-white rounded-lg shadow-inner">
+                        <h4 class="font-bold text-lg mb-2 text-stone-800">Perception Module</h4>
+                        <p class="text-sm text-stone-600 mb-4">This module is Nova's "eyes and ears," converting raw sensor data into meaningful information about the world, crucial for navigating diverse environments and interacting with objects like a water dispenser.</p>
+                        <ul class="list-disc pl-5 space-y-2 text-stone-700">
+                            <li><strong>Object Detection:</strong> Uses a <strong class="font-semibold">YOLOv8</strong> model, accelerated by TensorRT, to identify objects like water bottles, furniture, and even specific dispenser interfaces from a 4K camera feed in real-time.</li>
+                            <li><strong>Label Reading (OCR):</strong> Detected objects are cropped and passed to <strong class="font-semibold">PaddleOCR</strong> to read text on labels (e.g., dispenser instructions) or even recognize specific cards for interaction.</li>
+                            <li><strong>Mapping (SLAM):</strong> Fuses data from LiDAR and an IMU to build a 3D map of its environment, allowing for autonomous navigation to known locations (like the water dispenser) and precise localization on varied terrain, including hills.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="details-language" class="ai-details bg-white rounded-lg shadow-inner">
+                        <h4 class="font-bold text-lg mb-2 text-stone-800">Language & Logic Module</h4>
+                        <p class="text-sm text-stone-600 mb-4">This module interprets human intent and translates it into actions, enabling natural interaction and complex task execution for the grandparent assistant.</p>
+                        <ul class="list-disc pl-5 space-y-2 text-stone-700">
+                           <li><strong>Speech-to-Text (STT):</strong> An offline <strong class="font-semibold">Vosk ASR</strong> model recognizes voice commands in Telugu, allowing grandparents to give commands without needing internet access.</li>
+                           <li><strong>Natural Language Processing (NLP):</strong> A fine-tuned <strong class="font-semibold">TeluguBERT</strong> model parses the recognized text to classify user intent (e.g., "fetch water," "emergency stop") and extract parameters like "from the dispenser" or "place the card."</li>
+                           <li><strong>Text-to-Speech (TTS):</strong> Uses <strong class="font-semibold">Coqui TTS</strong> or eSpeak to generate synthesized Telugu speech for responses and confirmations, providing clear feedback to the user.</li>
+                           <li><strong>Decision Logic:</strong> A high-level task scheduler in ROS2 receives the parsed command and orchestrates the required actions, from planning a path to controlling the arm for precise dispenser interaction.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="controls" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Control Systems & Navigation</h2>
+                 <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">Advanced control theory ensures Nova moves smoothly and safely, especially under heavy loads and on challenging terrain like hills. It fuses data from multiple sensors for robust localization and precise navigation, essential for complex tasks like dispenser interaction.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                         <h3 class="text-2xl font-semibold mb-4 text-stone-800">Core Control Principles</h3>
+                        <ul class="space-y-3">
+                            <li><strong class="font-semibold">PID & Adaptive Control:</strong> Each motor and actuator uses a PID controller for precise position and speed. The system dynamically adapts to heavy loads and changing terrain (e.g., hill climbing) by monitoring current draw and adjusting gains, ensuring smooth and stable motion.</li>
+                            <li><strong class="font-semibold">Load Balancing & Stability:</strong> When the arm extends with a heavy payload (like a full water bottle) or on an incline, the IMU detects any tilt. The stabilizer actuators automatically extend and retract to shift the center of gravity and prevent tipping, maintaining equilibrium on slopes.</li>
+                            <li><strong class="font-semibold">ROS2 Runtime:</strong> All software modules run as nodes in a ROS2 environment. This provides robust, real-time messaging, scheduling, and fault tolerance for the entire system, crucial for coordinating complex multi-step tasks.</li>
+                            <li><strong class="font-semibold">Terrain Response:</strong> Nova adjusts its behavior based on ground contact and incline. If the IMU senses a steep slope, the speed of the tracks is reduced to maintain optimal traction and prevent slipping.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-100 p-8 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold mb-4">Sensor Fusion with Kalman Filter</h3>
+                        <p class="text-sm text-stone-600 mb-4">For robust SLAM and localization, Nova combines asynchronous data streams using an Extended Kalman Filter (EKF). This ensures accurate position tracking even when individual sensors might be unreliable.</p>
+                        <div class="space-y-2">
+                            <div class="bg-white p-3 rounded shadow">LiDAR Scans</div>
+                            <div class="text-xl">+</div>
+                            <div class="bg-white p-3 rounded shadow">IMU Data (Orientation)</div>
+                             <div class="text-xl">+</div>
+                            <div class="bg-white p-3 rounded shadow">Wheel Odometry (Position)</div>
+                             <div class="my-3 text-2xl font-bold text-orange-500">↓</div>
+                            <div class="bg-orange-500 text-white font-bold p-4 rounded-lg shadow-lg">Extended Kalman Filter (EKF)</div>
+                             <div class="my-3 text-2xl font-bold text-orange-500">↓</div>
+                            <div class="bg-stone-800 text-white p-3 rounded shadow-md">Accurate Robot Pose (x, y, θ)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="power" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Power & Electronics</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">A robust power system is critical for safely delivering high currents for lifting and providing long runtimes, especially for extended tasks like fetching water from a distant dispenser. Nova uses a high-capacity LiFePO₄ battery and a custom Power Distribution Board (PDB) with multiple safety features.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                     <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-stone-800">Power Distribution</h3>
+                        <div class="chart-container mx-auto">
+                            <canvas id="powerChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-stone-600 mt-4">The main 24V battery power is efficiently stepped down to different voltage rails for various subsystems, ensuring stable and reliable power delivery.</p>
+                     </div>
+                     <div>
+                        <h3 class="text-2xl font-semibold text-center mb-4 text-stone-800">Battery Performance vs. Load</h3>
+                         <div class="chart-container mx-auto">
+                            <canvas id="batteryChart"></canvas>
+                        </div>
+                        <div class="mt-4 flex justify-center space-x-4">
+                            <button id="lightLoadBtn" class="bg-orange-500 text-white px-4 py-2 rounded-lg shadow hover:bg-orange-600 transition">Light Load</button>
+                            <button id="heavyLoadBtn" class="bg-stone-700 text-white px-4 py-2 rounded-lg shadow hover:bg-stone-800 transition">Heavy Load</button>
+                        </div>
+                        <p class="text-center text-sm text-stone-600 mt-4">Understanding how different operational loads impact battery life is crucial for planning tasks and ensuring Nova can complete its duties without interruption.</p>
+                    </div>
+                </div>
+                <div class="mt-16 bg-stone-100 p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 text-stone-800">Key Power & Electronic Features</h3>
+                    <ul class="space-y-3 text-stone-700">
+                        <li><strong class="font-semibold">LiFePO₄ Battery:</strong> A 150 Ah, 24V custom pack chosen for its high cycle life, thermal stability, and safety, providing up to 14 hours of operation.</li>
+                        <li><strong class="font-semibold">Smart BMS:</strong> Monitors cell voltages, currents, and temperatures, with an emergency contactor for immediate power cut-off on fault.</li>
+                        <li><strong class="font-semibold">Dual-Redundant Power Rails:</strong> Critical circuits (motors, arm) are fed by parallel 24V rails to prevent single-point failures.</li>
+                        <li><strong class="font-semibold">Custom 4-Layer PCB:</strong> Integrates regulators, connectors, and microcontrollers with isolated analog/digital grounds and enhanced creepage distances for safety.</li>
+                        <li><strong class="font-semibold">Microcontroller Co-processing:</strong> STM32 and ESP32 handle time-critical I/O and networking, offloading the Jetson Orin NX.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="components" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Component Breakdown & Estimated Cost</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">This section provides a detailed list of the key components required for Nova's construction, along with their estimated prices in Indian Rupees (INR). This gives a transparent view of the hardware investment for building such an advanced assistant.</p>
+                
+                <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <input type="text" id="componentSearch" placeholder="Search components..." class="w-full p-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-stone-200">
+                            <thead class="bg-stone-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Component</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Qty</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Price (₹)</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Total (₹)</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody id="componentTableBody" class="bg-white divide-y divide-stone-200">
+                                </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-6 text-right text-lg font-bold text-stone-800">
+                        Total Estimated Cost: <span id="totalCost">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="functionality" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Nova in Action</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-12">See Nova's design come to life in a real-world scenario, demonstrating its ability to handle complex tasks.</p>
+                
+                <div class="flex justify-center max-w-4xl mx-auto">
+                    <div class="image-container">
+                        <img src="https://placehold.co/700x450/E0E0E0/333333?text=Nova+Robot+Functioning+Image+Here" alt="Nova Robot Functioning" class="rounded-lg">
+                        <p class="text-center text-sm text-stone-500 mt-2">Nova demonstrating its heavy-lift capability by transporting a water bottle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-white border-t border-stone-200">
+        <div class="container mx-auto px-6 py-6 text-center text-stone-500">
+            <p>Interactive System Design for the Nova Grandparent Assistant Robot. Empowering independence through advanced robotics.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const actuatorCtx = document.getElementById('actuatorChart').getContext('2d');
+            new Chart(actuatorCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Hydraulic Arm', 'Stabilizer Actuators'],
+                    datasets: [{
+                        label: 'Force (Newtons)',
+                        data: [1500, 900],
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.7)', // orange-500
+                            'rgba(68, 64, 60, 0.7)'   // stone-700
+                        ],
+                        borderColor: [
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(68, 64, 60, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Maximum Force Output' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Force (N)' }
+                        }
+                    }
+                }
+            });
+
+            const powerCtx = document.getElementById('powerChart').getContext('2d');
+            new Chart(powerCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['24V (Motors/Arm)', '12V (Control)', '5V (Microcontrollers)'],
+                    datasets: [{
+                        label: 'Power Distribution',
+                        data: [70, 20, 10], // Representative percentages
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.8)',
+                            'rgba(68, 64, 60, 0.8)',
+                            'rgba(120, 113, 108, 0.8)' // stone-500
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        title: { display: true, text: 'Main Bus (24V) Step-Down Allocation' }
+                    }
+                }
+            });
+
+            const lightLoadData = {
+                labels: Array.from({length: 15}, (_, i) => `${i}h`),
+                datasets: [{
+                    label: 'Battery % (Light Load)',
+                    data: [100, 94, 88, 82, 76, 70, 64, 58, 52, 46, 40, 34, 28, 22, 16],
+                    borderColor: 'rgba(249, 115, 22, 1)',
+                    backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            };
+
+            const heavyLoadData = {
+                labels: Array.from({length: 5}, (_, i) => `${i}h`),
+                datasets: [{
+                    label: 'Battery % (Heavy Load)',
+                    data: [100, 78, 56, 34, 12],
+                    borderColor: 'rgba(68, 64, 60, 1)',
+                    backgroundColor: 'rgba(68, 64, 60, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            };
+
+            const batteryCtx = document.getElementById('batteryChart').getContext('2d');
+            const batteryChart = new Chart(batteryCtx, {
+                type: 'line',
+                data: lightLoadData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Estimated Runtime' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: 'Battery Charge (%)' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Time (Hours)' }
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('lightLoadBtn').addEventListener('click', () => {
+                batteryChart.data = lightLoadData;
+                batteryChart.update();
+            });
+
+            document.getElementById('heavyLoadBtn').addEventListener('click', () => {
+                batteryChart.data = heavyLoadData;
+                batteryChart.update();
+            });
+            
+            const stages = {
+                perception: document.getElementById('stage-perception'),
+                language: document.getElementById('stage-language')
+            };
+            const details = {
+                perception: document.getElementById('details-perception'),
+                language: document.getElementById('details-language')
+            };
+
+            Object.keys(stages).forEach(key => {
+                stages[key].addEventListener('click', () => {
+                    const detailEl = details[key];
+                    const is_open = detailEl.classList.contains('open');
+                    
+                    Object.values(details).forEach(d => d.classList.remove('open'));
+
+                    if (!is_open) {
+                       detailEl.classList.add('open');
+                    }
+                });
+            });
+
+            // Component Data and Table Logic
+            const components = [
+                { name: "Jetson Orin NX 16GB", qty: 1, price: 60000, total: 60000, description: "AI computing unit with 100+ TOPS" },
+                { name: "IZI One Lite 4K Camera", qty: 1, price: 6000, total: 6000, description: "Main object detection camera" },
+                { name: "Angelite 1080p Autofocus Camera", qty: 1, price: 2600, total: 2600, description: "OCR & backup vision" },
+                { name: "FDUCE M160 Microphone", qty: 1, price: 1600, total: 1600, description: "Voice assistant mic" },
+                { name: "RPLIDAR A1", qty: 1, price: 8000, total: 8000, description: "For SLAM/navigation" },
+                { name: "9DOF IMU Sensor", qty: 1, price: 1200, total: 1200, description: "Orientation/stability tracking" },
+                { name: "Planetary Brushless Gear Motor (9.55Nm)", qty: 4, price: 8000, total: 32000, description: "For tank drive movement" },
+                { name: "Custom CNC Tank Wheels", qty: 4, price: 1500, total: 6000, description: "Wheel system with high load" },
+                { name: "3D Printed Tank Belts", qty: 2, price: 1000, total: 2000, description: "Belt-based traction" },
+                { name: "Hydraulic Linear Actuator (1500N, Arm)", qty: 1, price: 5500, total: 5500, description: "Main lifting actuator" },
+                { name: "900N Linear Actuators (Stabilizers)", qty: 4, price: 3200, total: 12800, description: "Bottom stabilizers" },
+                { name: "LiFePO4 Battery 24V 150Ah (custom)", qty: 1, price: 6750, total: 6750, description: "Power for 12hr+ runtime" },
+                { name: "Smart BMS with GPIO", qty: 1, price: 3000, total: 3000, description: "Battery safety system" },
+                { name: "60V to 24V Buck Converter", qty: 1, price: 1500, total: 1500, description: "Motor voltage regulation (updated to 24V system)" },
+                { name: "24V to 5V/12V Converters", qty: 2, price: 1000, total: 2000, description: "For logic & sensors" },
+                { name: "STM32 Microcontroller", qty: 1, price: 1200, total: 1200, description: "Sensor interfacing" },
+                { name: "ESP32 Dev Board", qty: 1, price: 900, total: 900, description: "Wi-Fi + BT logic" },
+                { name: "Custom 4-Layer PCB", qty: 1, price: 2500, total: 2500, description: "Core board for power and logic" },
+                { name: "INA219/ACS712 Current Sensors", qty: 2, price: 600, total: 1200, description: "Power monitoring" },
+                { name: "IP-rated Cables & Connectors", qty: 1, price: 1500, total: 1500, description: "Waterproof & rugged wiring" },
+                { name: "Aluminum Chassis Frame", qty: 1, price: 8000, total: 8000, description: "Supports heavy components" },
+                { name: "Voice Output Module (Speaker)", qty: 1, price: 500, total: 500, description: "For TTS responses" },
+                { name: "Misc Hardware (Fasteners, Hinges, etc.)", qty: 1, price: 2000, total: 2000, description: "Assembly items" }
+            ];
+
+            const componentTableBody = document.getElementById('componentTableBody');
+            const componentSearch = document.getElementById('componentSearch');
+            const totalCostSpan = document.getElementById('totalCost');
+
+            function renderComponents(filterText = '') {
+                componentTableBody.innerHTML = '';
+                let currentTotalCost = 0;
+                const filteredComponents = components.filter(item => 
+                    item.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                    item.description.toLowerCase().includes(filterText.toLowerCase())
+                );
+
+                filteredComponents.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-stone-50';
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900">${item.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-700">${item.qty}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-700">₹${item.price.toLocaleString('en-IN')}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-700">₹${item.total.toLocaleString('en-IN')}</td>
+                        <td class="px-6 py-4 whitespace-normal text-sm text-stone-700">${item.description}</td>
+                    `;
+                    componentTableBody.appendChild(row);
+                    currentTotalCost += item.total;
+                });
+                totalCostSpan.textContent = `₹${currentTotalCost.toLocaleString('en-IN')}`;
+            }
+
+            componentSearch.addEventListener('keyup', (event) => {
+                renderComponents(event.target.value);
+            });
+
+            // Initial render
+            renderComponents();
+        });
+    </script>
+</body>
+</html>
