@@ -1,1026 +1,747 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Project NOVA — All-in-One Build Portal (Massive Single File)</title>
-<meta name="description" content="Project NOVA — Complete codebase and docs embedded in single HTML for copy/paste. ROS2 nodes, firmware, Docker, models, BOM, wiring, training scripts and more." />
-<style>
-/* ---------- THEME & LAYOUT (long, comprehensive CSS) ---------- */
-:root{
-  --bg-1:#071426; --bg-2:#081a2d; --card:#071827; --muted:#9fb0c9;
-  --accent:#6ee7b7; --accent-2:#7c3aed; --glass:rgba(255,255,255,0.02);
-  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
-  --sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-}
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%); color:#e6eef6;font-family:var(--sans);font-size:15px;line-height:1.45;}
-.container{max-width:1280px;margin:18px auto;padding:22px;}
-.header{display:flex;gap:18px;align-items:center;}
-.logo{width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:900;color:#022; font-size:26px;box-shadow:0 20px 60px rgba(0,0,0,0.6);}
-.title h1{margin:0;font-size:30px;}
-.subtitle{color:var(--muted);margin-top:8px;}
-.top-actions{margin-left:auto;display:flex;gap:10px;}
-.btn{background:var(--glass);padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none;border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:700;}
-.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#042; border:none;}
-.main{display:grid;grid-template-columns:1fr 420px;gap:20px;margin-top:20px;}
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 40px rgba(2,6,23,0.6);}
-.section-title{display:flex;align-items:center;gap:12px;}
-.huge{font-size:20px;font-weight:800}
-.small-muted{color:var(--muted);font-size:13px}
-.code-box{background:rgba(0,0,0,0.45);padding:12px;border-radius:8px;overflow:auto;border:1px solid rgba(255,255,255,0.03);font-family:var(--mono);font-size:13px;color:#dfffe6}
-pre{margin:0;font-family:var(--mono);font-size:13px;color:#dbeffd}
-table{width:100%;border-collapse:collapse;color:#dbeafe;margin-top:8px}
-th,td{padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03);text-align:left}
-aside .card{position:sticky;top:28px}
-.hr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.02),transparent);margin:16px 0;border-radius:2px}
-.footer{color:var(--muted);font-size:13px;text-align:center;margin-top:18px}
-kbd{background:rgba(255,255,255,0.03);padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,0.02);font-family:var(--mono)}
-/* responsive */
-@media (max-width:1000px){.main{grid-template-columns:1fr}.logo{width:72px;height:72px;font-size:20px}}
-/* long CSS extras (for UI richness) */
-.nav-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.tab{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
-.tab.active{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#052026}
-.preview{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,0.02);height:320px;overflow:auto}
-.badge{display:inline-block;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project NOVA: Autonomous Heavy-Lift Robot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Original Color Palette: Calm Harmony (Orange & Grayish) -->
+    <!-- Background: #F5F5F4 (stone-100) -->
+    <!-- Dark Text: #44403C (stone-700) -->
+    <!-- Accent: #F97316 (orange-500) -->
+    <!-- Medium Text/Subheadings: #78716C (stone-500) -->
+    <!-- Light Hover: #FEF3C7 (amber-100) -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4; /* stone-100 */
+            color: #44403C; /* stone-700 */
+        }
+        .section-heading {
+            color: #44403C; /* stone-700 */
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.5rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px); /* Slight lift */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-primary {
+            background-color: #F97316; /* orange-500 */
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #EA580C; /* Darker orange */
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: #44403C; /* stone-700 */
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #292524; /* Darker stone */
+            transform: translateY(-2px);
+        }
+        .nav-link {
+            color: #44403C; /* stone-700 */
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #F97316; /* orange-500 */
+        }
+        .mobile-menu-item {
+            color: #44403C;
+            transition: background-color 0.2s;
+        }
+        .mobile-menu-item:hover {
+            background-color: #E7E5E4; /* stone-200 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px;
+            height: 320px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .ai-pipeline-stage {
+            cursor: pointer;
+            background-color: #FFFFFF; /* White for stages */
+            color: #44403C; /* Dark text */
+            font-weight: 600;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        .ai-pipeline-stage:hover {
+            transform: translateY(-4px);
+            background-color: #FEF3C7; /* amber-100 */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+        .ai-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding: 0 1.5rem;
+            background-color: #FFFFFF;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+        .ai-details.open {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+        .image-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .content-placeholder {
+            background-color: #E0E0E0;
+            color: #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            height: 256px;
+        }
+        @media (min-width: 768px) {
+            .content-placeholder {
+                height: 320px;
+            }
+        }
+        .list-dot {
+            color: #F97316; /* orange-500 */
+        }
+        .table-header {
+            background-color: #E7E5E4; /* stone-200 */
+            color: #44403C;
+        }
+        .table-row-hover:hover {
+            background-color: #F8F8F8; /* Very light grey */
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <header class="header">
-      <div class="logo">NOVA</div>
-      <div class="title">
-        <h1>Project NOVA — All-in-One Build Portal</h1>
-        <div class="subtitle">Embedded code, firmware, ROS2 packages, training scripts, wiring, BOM, and docs. Save as <strong>index.html</strong>.</div>
-      </div>
-      <div class="top-actions">
-        <button class="btn btn-primary" id="download-all">Download ZIP (generate)</button>
-        <a class="btn" href="https://github.com/SiddhardhaDev/Project-NOVA" target="_blank">Repo</a>
-      </div>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 py-3">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex justify-between items-center w-full md:w-auto mb-2 md:mb-0">
+                    <a href="#overview" class="text-2xl font-bold text-stone-800">Project NOVA.AI</a>
+                    <div class="md:hidden flex items-center">
+                        <!-- Removed mobile play/stop buttons -->
+                        <button id="menu-btn" class="text-stone-700 focus:outline-none p-2 rounded-md hover:bg-stone-200 ml-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <!-- Desktop navigation -->
+                <div class="hidden md:flex space-x-4 lg:space-x-8 items-center">
+                    <a href="#overview" class="nav-link">Overview</a>
+                    <a href="#use-case" class="nav-link">Use Case</a>
+                    <a href="#design" class="nav-link">Design</a>
+                    <a href="#mechanical" class="nav-link">Mechanical</a>
+                    <a href="#ai-pipeline" class="nav-link">AI Pipeline</a>
+                    <a href="#controls" class="nav-link">Controls</a>
+                    <a href="#power" class="nav-link">Power & Electronics</a>
+                    <a href="#components" class="nav-link">Components & Cost</a>
+                    <a href="#future-vision" class="nav-link">Future Vision</a>
+                    <!-- Removed desktop play/stop buttons -->
+                </div>
+                <!-- Mobile navigation menu -->
+                <div id="mobile-menu" class="hidden md:hidden mt-4 w-full space-y-2 bg-white rounded-lg shadow-md p-4">
+                     <a href="#overview" class="block py-2 px-4 text-sm mobile-menu-item rounded">Overview</a>
+                     <a href="#use-case" class="block py-2 px-4 text-sm mobile-menu-item rounded">Use Case</a>
+                     <a href="#design" class="block py-2 px-4 text-sm mobile-menu-item rounded">Design</a>
+                     <a href="#mechanical" class="block py-2 px-4 text-sm mobile-menu-item rounded">Mechanical</a>
+                     <a href="#ai-pipeline" class="block py-2 px-4 text-sm mobile-menu-item rounded">AI Pipeline</a>
+                     <a href="#controls" class="block py-2 px-4 text-sm mobile-menu-item rounded">Controls</a>
+                     <a href="#power" class="block py-2 px-4 text-sm mobile-menu-item rounded">Power & Electronics</a>
+                     <a href="#components" class="block py-2 px-4 text-sm mobile-menu-item rounded">Components & Cost</a>
+                     <a href="#future-vision" class="block py-2 px-4 text-sm mobile-menu-item rounded">Future Vision</a>
+                </div>
+            </div>
+        </nav>
     </header>
 
-    <div class="main">
-      <main>
-        <section class="card">
-          <div class="section-title"><div class="huge">Contents included</div><div class="small-muted">Large single-file snapshot of a complete starter codebase</div></div>
-          <div class="hr"></div>
-          <ul>
-            <li>ROS2 workspace skeleton (packages: nova_bringup, nova_base, nova_vision, nova_voice, nova_task, nova_msgs)</li>
-            <li>STM32 firmware for motor control and safety (C / HAL)</li>
-            <li>Jetson-friendly Dockerfile + start scripts</li>
-            <li>YOLOv8 training & deployment scripts + dataset manifest</li>
-            <li>PaddleOCR integration script</li>
-            <li>Detailed BOM CSV (long list) and procurement notes</li>
-            <li>Inline wiring SVG schematic (high level)</li>
-            <li>Sample UI pages and interactive JS (control panel simulation)</li>
-            <li>Long README & troubleshooting checklist</li>
-          </ul>
-          <div class="hr"></div>
-
-          <h3>Top-level project file tree (embedded)</h3>
-          <pre class="code-box">
-/Project-NOVA
-├─ README.md
-├─ docs/
-├─ ros2_ws/
-│  ├─ src/
-│  │  ├─ nova_msgs/
-│  │  ├─ nova_bringup/
-│  │  ├─ nova_base/
-│  │  ├─ nova_vision/
-│  │  ├─ nova_task/
-│  │  └─ nova_voice/
-│  └─ install/ build/
-├─ firmware/
-│  └─ stm32/
-├─ hardware/
-│  ├─ cad/
-│  └─ wiring/
-├─ docker/
-└─ assets/
-          </pre>
-
-          <div class="hr"></div>
-
-          <h3 id="ros2-skeleton">ROS2 Workspace — skeleton (long)</h3>
-          <p class="small-muted">Drop these files inside <code>ros2_ws/src/</code> and run <code>colcon build</code>. This section contains lengthy, complete files for quick copy/paste.</p>
-
-          <h4>1) nova_msgs — custom messages</h4>
-          <pre class="code-box">
-# File: ros2_ws/src/nova_msgs/package.xml
-<?xml version="1.0"?>
-<package format="3">
-  <name>nova_msgs</name>
-  <version>0.0.1</version>
-  <description>Custom messages for Project NOVA</description>
-  <maintainer email="you@example.com">Siddhardha</maintainer>
-  <license>Apache-2.0</license>
-  <buildtool_depend>ament_cmake</buildtool_depend>
-  <build_depend>rosidl_default_generators</build_depend>
-  <exec_depend>rosidl_runtime_py</exec_depend>
-</package>
-          </pre>
-
-          <pre class="code-box">
-# File: ros2_ws/src/nova_msgs/msg/Detection.msg
-string class_name
-float32 x
-float32 y
-float32 w
-float32 h
-float32 conf
-int32 frame_id
----
-# File: ros2_ws/src/nova_msgs/msg/Detections.msg
-nova_msgs/Detection[] detections
-          </pre>
-
-          <h4>2) nova_bringup — launch & params (very long)</h4>
-          <pre class="code-box">
-# File: ros2_ws/src/nova_bringup/package.xml
-<?xml version="1.0"?>
-<package format="3">
-  <name>nova_bringup</name>
-  <version>0.0.1</version>
-  <description>Bringup files and launch configurations for NOVA</description>
-  <maintainer email="you@example.com">Siddhardha</maintainer>
-  <license>Apache-2.0</license>
-  <buildtool_depend>ament_cmake</buildtool_depend>
-  <exec_depend>rclpy</exec_depend>
-</package>
-          </pre>
-
-          <pre class="code-box">
-# File: ros2_ws/src/nova_bringup/launch/nova_bringup.launch.py
-from launch import LaunchDescription
-from launch_ros.actions import Node
-from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-import os
-
-def generate_launch_description():
-    pkg_share = os.path.join(os.getcwd(), 'install', 'nova_bringup', 'share', 'nova_bringup')
-    return LaunchDescription([
-        Node(package='robot_state_publisher', executable='robot_state_publisher', output='screen'),
-        Node(package='nova_base', executable='base_node.py', name='nova_base', output='screen'),
-        Node(package='nova_vision', executable='yolo_node.py', name='nova_vision', output='screen'),
-        Node(package='nova_vision', executable='ocr_node.py', name='nova_ocr', output='screen'),
-        Node(package='nova_task', executable='task_node.py', name='nova_task', output='screen'),
-        Node(package='nova_voice', executable='tts_node.py', name='nova_tts', output='screen'),
-    ])
-</pre>
-
-          <h4>3) nova_base — controller & odom (long Python node)</h4>
-          <pre class="code-box">
-# File: ros2_ws/src/nova_base/setup.py
-from setuptools import setup
-
-package_name = 'nova_base'
-
-setup(
-    name=package_name,
-    version='0.0.1',
-    packages=[package_name],
-    py_modules=[],
-    install_requires=['setuptools'],
-    zip_safe=True,
-    maintainer='You',
-    maintainer_email='you@example.com',
-    description='Base controller for NOVA',
-    license='Apache-2.0',
-    entry_points={
-        'console_scripts': [
-            'base_node = nova_base.base_node:main',
-        ],
-    },
-)
-</pre>
-
-          <pre class="code-box">
-# File: ros2_ws/src/nova_base/nova_base/base_node.py
-#!/usr/bin/env python3
-import rclpy
-from rclpy.node import Node
-from geometry_msgs.msg import Twist, PoseStamped
-from nav_msgs.msg import Odometry
-from std_msgs.msg import String, Bool, Float32
-import serial
-import time
-import threading
-import json
-import os
-
-class BaseNode(Node):
-    def __init__(self):
-        super().__init__('nova_base')
-        self.declare_parameter('serial_port', '/dev/ttyACM0')
-        self.declare_parameter('baudrate', 115200)
-        self.port = self.get_parameter('serial_port').value
-        self.baud = self.get_parameter('baudrate').value
-        self.get_logger().info(f'Opening serial port: {self.port} @ {self.baud}')
-        try:
-            self.ser = serial.Serial(self.port, self.baud, timeout=0.05)
-        except Exception as e:
-            self.get_logger().error(f'Cannot open serial {self.port}: {e}')
-            self.ser = None
-        self.cmd_sub = self.create_subscription(Twist, '/cmd_vel', self.cb_cmd, 10)
-        self.odom_pub = self.create_publisher(Odometry, '/odom', 10)
-        self.status_pub = self.create_publisher(String, '/base/status', 10)
-        self.timer = self.create_timer(0.05, self.timer_cb)
-        self.last_cmd = Twist()
-        self.lock = threading.Lock()
-        self.encoder_l = 0
-        self.encoder_r = 0
-        self.wheel_base = 0.45
-        self.wheel_radius = 0.09
-        self.seq = 0
-        self.start_time = self.get_clock().now()
-
-    def cb_cmd(self, msg: Twist):
-        with self.lock:
-            self.last_cmd = msg
-            # convert to motor velocity command (example scaling)
-            v = msg.linear.x
-            w = msg.angular.z
-            left = v - (w * self.wheel_base / 2.0)
-            right = v + (w * self.wheel_base / 2.0)
-            # send to serial
-            self.send_drive_command(left, right)
-
-    def send_drive_command(self, left, right):
-        if not self.ser:
-            return
-        try:
-            cmd = f"VEL {left:.3f} {right:.3f}\\n".encode('utf-8')
-            self.ser.write(cmd)
-        except Exception as e:
-            self.get_logger().error(f'Failed to send drive command: {e}')
-
-    def timer_cb(self):
-        # read serial for encoder/heartbeat
-        if self.ser and self.ser.in_waiting:
-            try:
-                line = self.ser.readline().decode('utf-8').strip()
-                if line:
-                    self.handle_serial_line(line)
-            except Exception as e:
-                self.get_logger().error(f'Serial read error: {e}')
-        # publish heartbeat status
-        st = String()
-        st.data = 'ok'
-        self.status_pub.publish(st)
-
-    def handle_serial_line(self, line):
-        # expected JSON: {"enc_l":1234,"enc_r":5678,"bat_v":24.2}
-        try:
-            data = json.loads(line)
-            self.encoder_l = data.get('enc_l', self.encoder_l)
-            self.encoder_r = data.get('enc_r', self.encoder_r)
-            # build odom
-            odom = Odometry()
-            odom.header.stamp = self.get_clock().now().to_msg()
-            odom.header.frame_id = 'odom'
-            odom.child_frame_id = 'base_link'
-            # TODO: compute pose integration from encoders
-            self.odom_pub.publish(odom)
-        except Exception as e:
-            # non-json line, just log
-            self.get_logger().debug(f'non-json serial: {line}')
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = BaseNode()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.get_logger().info('Shutting down base node')
-        node.destroy_node()
-        rclpy.shutdown()
-</pre>
-
-          <h4>4) nova_vision — YOLOv8 + OCR (long Python scripts)</h4>
-          <pre class="code-box">
-# File: ros2_ws/src/nova_vision/setup.py
-from setuptools import setup
-
-package_name = 'nova_vision'
-
-setup(
-    name=package_name,
-    version='0.0.1',
-    packages=[package_name],
-    install_requires=['setuptools'],
-    zip_safe=True,
-    maintainer='You',
-    maintainer_email='you@example.com',
-    description='Vision nodes for NOVA',
-    license='Apache-2.0',
-    entry_points={
-        'console_scripts': [
-            'yolo_node = nova_vision.yolo_node:main',
-            'ocr_node = nova_vision.ocr_node:main',
-        ],
-    },
-)
-</pre>
-
-          <pre class="code-box">
-# File: ros2_ws/src/nova_vision/nova_vision/yolo_node.py
-#!/usr/bin/env python3
-import rclpy
-from rclpy.node import Node
-from sensor_msgs.msg import Image
-from cv_bridge import CvBridge
-from nova_msgs.msg import Detections, Detection
-import numpy as np
-import cv2
-import time
-from ultralytics import YOLO
-import os
-
-class YoloNode(Node):
-    def __init__(self):
-        super().__init__('yolo_node')
-        self.bridge = CvBridge()
-        self.sub = self.create_subscription(Image, '/camera/color/image_raw', self.cb, 5)
-        self.pub = self.create_publisher(Detections, '/detections', 5)
-        model_path = os.environ.get('NOVA_YOLO_WEIGHTS', 'yolov8n.pt')
-        self.get_logger().info(f'Loading YOLO model: {model_path}')
-        try:
-            self.model = YOLO(model_path)
-        except Exception as e:
-            self.get_logger().error(f'Failed to load YOLO: {e}')
-            self.model = None
-
-    def cb(self, msg: Image):
-        if self.model is None:
-            return
-        img = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
-        results = self.model(img, device='cuda:0', imgsz=640, conf=0.35)
-        dets = Detections()
-        for r in results:
-            boxes = r.boxes
-            for b in boxes:
-                cls = int(b.cls[0])
-                name = self.model.names[cls]
-                x1,y1,x2,y2 = map(int, b.xyxy[0].tolist())
-                w = x2-x1; h = y2-y1
-                d = Detection()
-                d.class_name = str(name)
-                d.x = float(x1); d.y=float(y1); d.w=float(w); d.h=float(h)
-                d.conf = float(b.conf[0])
-                dets.detections.append(d)
-        self.pub.publish(dets)
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = YoloNode()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
-</pre>
-
-          <pre class="code-box">
-# File: ros2_ws/src/nova_vision/nova_vision/ocr_node.py
-#!/usr/bin/env python3
-import rclpy
-from rclpy.node import Node
-from sensor_msgs.msg import Image
-from cv_bridge import CvBridge
-from paddleocr import PaddleOCR
-from std_msgs.msg import String
-import numpy as np
-import cv2
-
-class OCRNode(Node):
-    def __init__(self):
-        super().__init__('ocr_node')
-        self.bridge = CvBridge()
-        self.sub = self.create_subscription(Image, '/roi/image', self.cb, 5)
-        self.pub = self.create_publisher(String, '/ocr/text', 5)
-        self.ocr = PaddleOCR(lang='en', use_angle_cls=True, use_gpu=True)
-
-    def cb(self, msg: Image):
-        img = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
-        res = self.ocr.ocr(img, cls=True)
-        texts = []
-        for line in res:
-            if len(line) > 1:
-                txt = line[1][0]
-                conf = line[1][1]
-                texts.append(f"{txt} ({conf:.2f})")
-        out = String()
-        out.data = "\\n".join(texts)
-        self.pub.publish(out)
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = OCRNode()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
-</pre>
-
-          <h4>5) nova_voice — TTS & STT stubs (long)</h4>
-          <pre class="code-box">
-# File: ros2_ws/src/nova_voice/nova_voice/tts_node.py
-#!/usr/bin/env python3
-import rclpy
-from rclpy.node import Node
-from std_msgs.msg import String
-import subprocess
-import os
-
-class TTS(Node):
-    def __init__(self):
-        super().__init__('nova_tts')
-        self.sub = self.create_subscription(String, '/tts/say', self.cb, 10)
-        self.voice = os.environ.get('NOVA_TTS_VOICE', 'te')  # Telugu code for espeak
-        self.get_logger().info(f'TTS voice: {self.voice}')
-
-    def cb(self, msg: String):
-        text = msg.data
-        # Call espeak (ensure installed) - for better quality replace with Coqui or TTS model
-        try:
-            subprocess.Popen(['espeak', '-v', self.voice, text])
-        except Exception as e:
-            self.get_logger().error(f'TTS failed: {e}')
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = TTS()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
-</pre>
-
-          <h4>6) nova_task — state machine (long)</h4>
-          <pre class="code-box">
-# File: ros2_ws/src/nova_task/nova_task/task_node.py
-#!/usr/bin/env python3
-import rclpy
-from rclpy.node import Node
-from std_msgs.msg import String, Bool
-from geometry_msgs.msg import PoseStamped
-import time
-
-class TaskNode(Node):
-    def __init__(self):
-        super().__init__('nova_task')
-        self.get_logger().info('Task node starting')
-        self.intent_sub = self.create_subscription(String, '/nlp_intent', self.cb_intent, 10)
-        self.tts_pub = self.create_publisher(String, '/tts/say', 10)
-        self.nav_pub = self.create_publisher(PoseStamped, '/goal_pose', 10)
-        self.state = 'IDLE'
-        self.current_task = None
-
-    def cb_intent(self, msg: String):
-        intent = msg.data.lower()
-        self.get_logger().info(f'Received intent: {intent}')
-        if 'fetch' in intent and 'water' in intent:
-            self.start_fetch_water()
-
-    def start_fetch_water(self):
-        self.state = 'NAV_TO_DISPENSER'
-        self.tts('నేను నీటి కోసం వెళ్తున్నాను')  # Telugu 'I am going to fetch water'
-        # publish a sample pose - replace with real waypoint
-        p = PoseStamped()
-        p.header.frame_id = 'map'
-        p.pose.position.x = 2.0
-        p.pose.position.y = 1.0
-        p.pose.orientation.w = 1.0
-        self.nav_pub.publish(p)
-
-    def tts(self, text):
-        m = String()
-        m.data = text
-        self.tts_pub.publish(m)
-
-def main(args=None):
-    rclpy.init(args=args)
-    node = TaskNode()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
-</pre>
-
-          <div class="hr"></div>
-
-          <h3>Firmware — STM32 motor controller & safety (complete C file long)</h3>
-          <pre class="code-box">
-/* File: firmware/stm32/src/main.c
- *
- * Minimal STM32 firmware skeleton for NOVA:
- * - UART bridge for commands "VEL L R"
- * - Reads quadrature encoders with timers
- * - Publishes JSON heartbeat on UART: {"enc_l":1234,"enc_r":5678,"bat_v":24.2}
- * - E-stop digital input that cuts PWM outputs
- *
- * Note: This is a skeleton for STM32 HAL-based environment (CubeMX).
- */
-
-#include "main.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-/* Hardware specific handles - defined in CubeMX generated files */
-UART_HandleTypeDef huart1;
-TIM_HandleTypeDef htim1; // encoder left
-TIM_HandleTypeDef htim2; // encoder right
-TIM_HandleTypeDef htim3; // PWM timer
-ADC_HandleTypeDef hadc1; // battery voltage monitor
-
-volatile int32_t enc_l = 0;
-volatile int32_t enc_r = 0;
-volatile bool estop = false;
-
-char rxbuf[128];
-int rxidx = 0;
-
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_USART1_UART_Init(void);
-static void MX_TIM1_Init(void);
-static void MX_TIM2_Init(void);
-static void MX_TIM3_Init(void);
-static void MX_ADC1_Init(void);
-
-int _write(int file, char *ptr, int len) {
-    // retarget printf to UART
-    HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, HAL_MAX_DELAY);
-    return len;
-}
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-    // called by SysTick or timer
-}
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-    if (GPIO_Pin == GPIO_PIN_0) { // example estop pin
-        estop = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_RESET;
-    }
-}
-
-// minimal quadrature read (if using timer in encoder mode)
-// additional overflow handling required for production
-int32_t read_enc_count_enc(TIM_HandleTypeDef *htim) {
-    return (int32_t)(__HAL_TIM_GET_COUNTER(htim));
-}
-
-void process_uart_line(const char *ln) {
-    // simple parser for: VEL <left> <right>
-    if (strncmp(ln, "VEL", 3) == 0) {
-        float l, r;
-        if (sscanf(ln+3, "%f %f", &l, &r) == 2) {
-            // convert to PWM duty, clamp
-            int pwm_l = (int)(fabs(l) * 1000.0f);
-            int pwm_r = (int)(fabs(r) * 1000.0f);
-            if (pwm_l > 1000) pwm_l = 1000;
-            if (pwm_r > 1000) pwm_r = 1000;
-            if (!estop) {
-                // update PWM registers (tim3 channel 1/2)
-                __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, pwm_l);
-                __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, pwm_r);
-            } else {
-                __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-                __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
-            }
-        }
-    } else if (strncmp(ln, "STOP", 4) == 0) {
-        // immediate stop
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-        __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
-    }
-}
-
-void uart_rx_task(void) {
-    // non-blocking read - collect until newline
-    uint8_t c;
-    while (HAL_UART_Receive(&huart1, &c, 1, 10) == HAL_OK) {
-        if (c == '\\n' || c == '\\r') {
-            if (rxidx>0) {
-                rxbuf[rxidx]=0;
-                process_uart_line(rxbuf);
-                rxidx = 0;
-            }
-        } else {
-            if (rxidx < (int)sizeof(rxbuf)-1) rxbuf[rxidx++]=c;
-        }
-    }
-}
-
-int main(void) {
-    HAL_Init();
-    SystemClock_Config();
-    MX_GPIO_Init();
-    MX_USART1_UART_Init();
-    MX_TIM1_Init();
-    MX_TIM2_Init();
-    MX_TIM3_Init();
-    MX_ADC1_Init();
-
-    // start timers in encoder mode
-    HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
-    HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-
-    uint32_t last_pub = HAL_GetTick();
-    char out[256];
-
-    while (1) {
-        uart_rx_task();
-        // update encoder counts
-        enc_l = read_enc_count_enc(&htim1);
-        enc_r = read_enc_count_enc(&htim2);
-
-        // sample battery (ADC) - simple average
-        HAL_ADC_Start(&hadc1);
-        HAL_ADC_PollForConversion(&hadc1, 10);
-        uint32_t adc = HAL_ADC_GetValue(&hadc1);
-        float bat_v = (adc / 4095.0f) * 12.6f * 2.0f; // example scaling
-
-        // every 250ms send status as JSON
-        uint32_t now = HAL_GetTick();
-        if (now - last_pub > 250) {
-            last_pub = now;
-            snprintf(out, sizeof(out), "{\\"enc_l\\":%ld,\\"enc_r\\":%ld,\\"bat_v\\":%.2f}\\n", (long)enc_l, (long)enc_r, bat_v);
-            HAL_UART_Transmit(&huart1, (uint8_t*)out, strlen(out), 20);
-        }
-        HAL_Delay(5);
-    }
-}
-</pre>
-
-          <div class="hr"></div>
-
-          <h3>Docker & Jetson Setup (long)</h3>
-          <pre class="code-box">
-# File: docker/jetson/Dockerfile (example)
-FROM nvcr.io/nvidia/l4t-pytorch:r35.6.1-pth1.14-py3
-LABEL maintainer="you@example.com"
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y \
-    python3-pip git vim ffmpeg libgl1 \
-    && rm -rf /var/lib/apt/lists/*
-COPY requirements.jetson.txt /tmp/requirements.txt
-RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
-# Add user to avoid running as root
-RUN useradd -ms /bin/bash nova
-USER nova
-WORKDIR /home/nova
-COPY . /home/nova/workspace
-CMD ["bash", "/home/nova/workspace/docker/start_jetson.sh"]
-</pre>
-
-          <pre class="code-box">
-# File: docker/requirements.jetson.txt
-torch
-torchvision
-torchaudio
-ultralytics
-opencv-python-headless
-pillow
-paddleocr
-numpy
-pyserial
-rclpy
-colcon-common-extensions
-rosdep
-transformers
-sentencepiece
-</pre>
-
-          <pre class="code-box">
-# File: docker/start_jetson.sh
-#!/bin/bash
-set -e
-echo "Starting NOVA container services..."
-# source ros2 if installed in image
-if [ -f /opt/ros/humble/setup.bash ]; then
-  source /opt/ros/humble/setup.bash
-fi
-# build ros workspace if present
-if [ -d /home/nova/workspace/ros2_ws ]; then
-  cd /home/nova/workspace/ros2_ws
-  colcon build || true
-  source install/setup.bash || true
-fi
-# start bringup
-ros2 launch nova_bringup nova_bringup.launch.py
-</pre>
-
-          <div class="hr"></div>
-
-          <h3>YOLOv8 training & dataset manifest (long)</h3>
-          <pre class="code-box">
-# File: training/train_yolo.sh
-#!/bin/bash
-# Example training script - adjust dataset paths
-DATASET_DIR=${1:-"./dataset"}
-WEIGHTS=${2:-"yolov8n.pt"}
-EPOCHS=${3:-50}
-BATCH=${4:-16}
-IMG_SIZE=${5:-640}
-OUTDIR=${6:-"./runs/train"}
-
-python3 - <<'PY'
-from ultralytics import YOLO
-import yaml, os, sys
-# build data.yaml in dataset
-data_yaml = {
-  'train': os.path.join('$DATASET_DIR', 'images', 'train'),
-  'val': os.path.join('$DATASET_DIR', 'images', 'val'),
-  'nc': 3,
-  'names': ['water_bottle','dispenser_panel','button']
-}
-with open('data.yaml','w') as f:
-  yaml.dump(data_yaml, f)
-print('data.yaml written')
-PY
-
-python3 -m pip install --upgrade ultralytics
-ultralytics train data=data.yaml model=$WEIGHTS epochs=$EPOCHS imgsz=$IMG_SIZE batch=$BATCH project=$OUTDIR
-</pre>
-
-          <pre class="code-box">
-# File: dataset/README.md
-Dataset structure:
-dataset/
-  images/
-    train/
-      img001.jpg
-      img002.jpg
-      ...
-    val/
-      val001.jpg
-  labels/
-    train/
-      img001.txt   # YOLO format: class x_center y_center width height (normalized)
-    val/
-      val001.txt
-Manually collect varied lighting and angles. Aim 500-2000 images, balanced classes.
-</pre>
-
-          <div class="hr"></div>
-
-          <h3>BOM — long CSV embedded</h3>
-          <pre class="code-box">
-# File: hardware/bom.csv
-Item,Description,Qty,EstPriceINR,SupplierNotes
-Jetson Orin NX 16GB,Onboard AI compute,1,60000,Check local distributor
-24V LiFePO4 40Ah,Battery pack 8S with BMS,1,30000,High discharge BMS recommend
-Roboclaw 2x60A,Motor driver with encoder support,1,12000,Alternatively Sabertooth
-DC motors 24V 350W,Geared brushed DC w/ encoders,2,8000,2 motors for tracked base
-Track kit 400mm,Complete tracked kit with sprockets,1,7000,Ensure fit with chassis
-RPLIDAR A2,2D LiDAR,1,25000,Or YDLIDAR for budget
-Luxonis OAK-D Pro,Depth+AI camera,1,20000,Integrates well with Jetson
-STM32F446RE,Nucleo board for IO,1,2500,
-ESP32 Devkit,WiFi/BLE microcontroller,1,800,
-Linear Actuator 1000N,24V,100mm stroke,1,7000,
-Hydraulic pump 1500N,If using hydraulics,1,15000,
-Contactor 48V 100A,Main power relay,1,2500,
-Anderson SB50 connectors,Power connectors,4,800,
-Wiring & misc,Cables, connectors, fuses, bolts,1,5000,
-TotalEstimate,, ,222900,
-</pre>
-
-          <div class="hr"></div>
-
-          <h3>Wiring schematic (inline SVG — high-level)</h3>
-          <div class="preview">
-            <!-- High-level wiring SVG -->
-            <svg width="100%" height="320" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="lg1" x1="0" x2="1"><stop offset="0" stop-color="#6ee7b7"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
-              </defs>
-              <rect x="8" y="8" width="1184" height="344" rx="10" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)"/>
-              <g font-family="Verdana" font-size="12" fill="#dbeafe">
-                <rect x="30" y="40" width="180" height="80" rx="8" fill="#062030" stroke="rgba(255,255,255,0.03)"/>
-                <text x="40" y="64">Battery Pack</text>
-                <text x="40" y="82" font-size="11" fill="#9fb0c9">24V LiFePO4</text>
-
-                <rect x="260" y="40" width="220" height="80" rx="8" fill="#062030" stroke="rgba(255,255,255,0.03)"/>
-                <text x="272" y="64">Power Distribution</text>
-                <text x="272" y="82" font-size="11" fill="#9fb0c9">DC-DC 24→12 & 5V</text>
-
-                <rect x="520" y="40" width="220" height="80" rx="8" fill="#062030" stroke="rgba(255,255,255,0.03)"/>
-                <text x="532" y="64">Jetson Orin</text>
-                <text x="532" y="82" font-size="11" fill="#9fb0c9">Main compute</text>
-
-                <rect x="780" y="40" width="320" height="80" rx="8" fill="#062030" stroke="rgba(255,255,255,0.03)"/>
-                <text x="792" y="64">Motor Drivers</text>
-                <text x="792" y="82" font-size="11" fill="#9fb0c9">Roboclaw / Sabertooth</text>
-
-                <!-- lines -->
-                <line x1="210" y1="80" x2="260" y2="80" stroke="url(#lg1)" stroke-width="3"/>
-                <line x1="480" y1="80" x2="520" y2="80" stroke="url(#lg1)" stroke-width="3"/>
-                <line x1="740" y1="80" x2="780" y2="80" stroke="url(#lg1)" stroke-width="3"/>
-
-                <!-- sensors -->
-                <rect x="60" y="150" width="240" height="60" rx="8" fill="#061624" stroke="rgba(255,255,255,0.02)"/>
-                <text x="72" y="176">LiDAR</text>
-                <text x="72" y="192" font-size="11" fill="#9fb0c9">RPLIDAR</text>
-
-                <rect x="340" y="150" width="220" height="60" rx="8" fill="#061624" stroke="rgba(255,255,255,0.02)"/>
-                <text x="352" y="176">OAK-D</text>
-                <text x="352" y="192" font-size="11" fill="#9fb0c9">Stereo + IMU</text>
-
-                <rect x="700" y="150" width="200" height="60" rx="8" fill="#061624" stroke="rgba(255,255,255,0.02)"/>
-                <text x="712" y="176">STM32</text>
-                <text x="712" y="192" font-size="11" fill="#9fb0c9">Motor IO & Safety</text>
-
-                <!-- connections -->
-                <line x1="600" y1="120" x2="580" y2="150" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-dasharray="6 4"/>
-                <text x="620" y="128" fill="#9fb0c9" font-size="11">USB/Serial</text>
-
-                <line x1="760" y1="120" x2="760" y2="150" stroke="rgba(255,255,255,0.06)" stroke-width="2" stroke-dasharray="6 4"/>
-
-                <text x="40" y="250" font-size="12" fill="#dbeafe">Notes: E-stop hardwired to contactor; motor drivers share 24V main; Jetson powered by 24→5V DC-DC; sensor lines to USB hub or direct to Jetson.</text>
-              </g>
-            </svg>
-          </div>
-
-          <div class="hr"></div>
-
-          <h3>Troubleshooting & Thermal Management (long checklist)</h3>
-          <ul>
-            <li>Jetson thermal throttling: install active fan + heatsink, log <code>/sys/devices/...</code> temperatures, reduce max frequency in software if needed.</li>
-            <li>Motor driver overheating: ensure correct current limits, forced-air on drivers, thermal cutoff fuse as last resort.</li>
-            <li>EMI: separate power & signal harnesses; use ferrite beads on USB and power lines.</li>
-            <li>Odometry drift: run wheel calibration, use <code>robot_localization</code> with IMU & wheel odom fusion.</li>
-            <li>STT inaccuracies: reduce command grammar to small closed set, add confirmation TTS before task execution.</li>
-          </ul>
-        </section>
-
-        <!-- LONG APP-LIKE CONTROL PANEL -->
-        <section class="card" style="margin-top:18px;">
-          <div class="section-title"><div class="huge">Control Panel (simulated)</div><div class="small-muted">Mock UI to preview commands and logs</div></div>
-          <div class="nav-tabs" role="tablist">
-            <div class="tab active" data-tab="teleop">Teleop</div>
-            <div class="tab" data-tab="logs">Logs</div>
-            <div class="tab" data-tab="maps">Maps</div>
-            <div class="tab" data-tab="models">Models</div>
-          </div>
-
-          <div id="teleop" class="preview" style="display:block">
-            <h4>Teleop</h4>
-            <p class="small-muted">Use the controls below to simulate /cmd_vel publishing. (This page is local-only; to hook up to ROS2, use rosbridge or ros2-web-bridge.)</p>
-            <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;">
-              <div>
-                <label class="small-muted">Linear (m/s)</label><br>
-                <input id="lin" type="range" min="-1" max="1" step="0.01" value="0" style="width:320px">
-              </div>
-              <div>
-                <label class="small-muted">Angular (rad/s)</label><br>
-                <input id="ang" type="range" min="-2" max="2" step="0.01" value="0" style="width:200px">
-              </div>
-              <div style="margin-left:auto">
-                <button class="btn btn-primary" id="send-cmd">Send</button>
-              </div>
+    <main>
+        <section id="overview" class="container mx-auto px-4 sm:px-6 py-12 md:py-16 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold text-stone-800 mb-4">Project NOVA: Autonomous Heavy-Lift Robot</h1>
+            <p class="text-base md:text-lg text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Welcome to the future of advanced robotics! Project NOVA is a dedicated, all-terrain autonomous assistant meticulously engineered to effortlessly handle the most demanding heavy-duty tasks. Imagine a world where lifting heavy objects, navigating challenging outdoor environments, and performing complex interactions are all managed seamlessly by a reliable robotic companion. Project NOVA is designed to enhance efficiency, safety, and autonomy in various applications.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+                <div class="card p-5">
+                    <h3 class="text-stone-500 font-semibold mb-2 text-sm md:text-base">Max Payload</h3>
+                    <p class="text-4xl md:text-5xl font-bold text-orange-500">100<span class="text-2xl md:text-3xl ml-1">kg</span></p>
+                    <p class="text-xs md:text-sm text-stone-500 mt-2">Via a robust 1500 N hydraulic arm, designed for heavy lifting.</p>
+                </div>
+                <div class="card p-5">
+                    <h3 class="text-stone-500 font-semibold mb-2 text-sm md:text-base">Max Runtime</h3>
+                    <p class="text-4xl md:text-5xl font-bold text-orange-500">~14<span class="text-2xl md:text-3xl ml-1">hrs</span></p>
+                    <p class="text-xs md:text-sm text-stone-500 mt-2">Extended operation on a high-capacity 150 Ah LiFePO₄ battery (under light load).</p>
+                </div>
+                <div class="card p-5">
+                    <h3 class="text-stone-500 font-semibold mb-2 text-sm md:text-base">Mobility</h3>
+                    <p class="text-4xl md:text-5xl font-bold text-orange-500">45°<span class="text-2xl md:text-3xl ml-1">slope</span></p>
+                    <p class="text-xs md:text-sm text-stone-500 mt-2">Unmatched all-terrain capability with a rugged tracked chassis.</p>
+                </div>
             </div>
-            <pre id="teleop-log" class="code-box">teleop log...</pre>
-          </div>
-
-          <div id="logs" class="preview" style="display:none">
-            <h4>System Logs</h4>
-            <pre id="sys-log" class="code-box">System log buffer will appear here (simulated)</pre>
-          </div>
-
-          <div id="maps" class="preview" style="display:none">
-            <h4>Maps</h4>
-            <p class="small-muted">Saved maps will be listed here. Use Nav2 to save maps to disk and drag them into this UI for preview.</p>
-            <ul id="map-list">
-              <li>office_map_2025-08-15.pgm</li>
-            </ul>
-          </div>
-
-          <div id="models" class="preview" style="display:none">
-            <h4>Models</h4>
-            <p class="small-muted">Model artifacts and basic metrics</p>
-            <table>
-              <thead><tr><th>Model</th><th>Type</th><th>mAP</th><th>Size</th></tr></thead>
-              <tbody>
-                <tr><td>yolov8n-nova</td><td>yolo</td><td>0.76</td><td>14MB</td></tr>
-                <tr><td>paddle-ocr-en</td><td>ocr</td><td>n/a</td><td>120MB</td></tr>
-              </tbody>
-            </table>
-          </div>
         </section>
 
-      </main>
+        <section id="use-case" class="py-12 md:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Complex Task Scenario: Automated Water Delivery</h2>
+                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA excels at handling intricate, multi-step tasks, seamlessly integrating perception, planning, and precise execution. Let's explore a detailed scenario: fetching a water bottle from a remote dispenser.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">1. Voice Command & Intelligent Planning</h3>
+                        <p class="text-sm text-stone-700">The user simply states: "Project NOVA, please bring me a water bottle from the dispenser." Project NOVA's advanced speech-to-text module instantly processes the Telugu command, understanding the intent. Its internal logic then formulates an optimal, energy-efficient route to the known water dispenser location, even if it involves traversing challenging outdoor terrain like a garden hill.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">2. Robust All-Terrain Navigation</h3>
+                        <p class="text-sm text-stone-700">With its powerful tracked chassis and terrain-stabilizing actuators, Project NOVA autonomously navigates the environment. Utilizing simultaneous localization and mapping (SLAM) from LiDAR and IMU data, it precisely tracks its position and avoids dynamic obstacles. Its adaptive control system ensures smooth ascent and descent on slopes up to $45^{\circ}$, maintaining stability even on uneven ground.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">3. Precise Smart Dispenser Interaction</h3>
+                        <p class="text-sm text-stone-700">Upon arrival at the dispenser, Project NOVA's high-resolution vision system, powered by YOLOv8, accurately identifies the dispenser's interface, buttons, or even an RFID reader. Its hydraulic arm, with fine-tuned motor control, extends with millimeter precision to either press a button or delicately place a pre-programmed RFID card, initiating the water pouring sequence.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">4. Secure Bottle Retrieval & Stowage</h3>
+                        <p class="text-sm text-stone-700">Once the water has filled the designated bottle (either one Project NOVA carried or a fixed bottle at the dispenser), Project NOVA's soft-padded gripper gently but firmly grasps the filled container. It then carefully retracts and secures the bottle within its dedicated 40cm diameter internal cargo bay, preventing any spills or shifts during transit.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">5. Safe Return & Personalized Delivery</h3>
+                        <p class="text-sm text-stone-700">Project NOVA then calculates the most efficient return path, descending the hill with controlled precision and navigating back to the user's location. Leveraging its internal memory of user preferences, it delivers the water bottle to a pre-defined accessible spot, announcing clearly in Telugu: "Your water is ready."</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">6. Continuous Learning & Optimization</h3>
+                        <p class="text-sm text-stone-700">After each successful task, Project NOVA logs environmental data, terrain conditions, and interaction specifics. This data feeds into its learning algorithms, continuously refining its navigation, object interaction, and power management strategies, making it more efficient and reliable for all future requests.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <aside>
-        <div class="card">
-          <h3>Quick Actions</h3>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
-            <button class="btn" onclick="copyAll('ros2')">Copy ROS2 skeleton</button>
-            <button class="btn" onclick="copyAll('firmware')">Copy STM32 firmware</button>
-            <button class="btn" onclick="copyAll('docker')">Copy Docker files</button>
-            <button class="btn" onclick="copyAll('yolo')">Copy YOLO scripts</button>
-          </div>
-          <div class="hr"></div>
-          <h4>Project Status</h4>
-          <p class="small-muted">MVP target: indoor fetch (20kg in-bay) → achieved by scaled electrical actuators & tracked base. Heavy-lift roadmap included in docs.</p>
+        <section id="design" class="py-12 md:py-20">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Robot Design & Aesthetics</h2>
+                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA's design is a harmonious blend of industrial-grade durability and a friendly, non-intrusive aesthetic. Its robust structure is engineered for demanding tasks, while its smooth lines and compact form ensure it integrates seamlessly into any environment. Every design choice prioritizes both high performance and user comfort.</p>
+                
+                <div class="flex flex-col items-center space-y-8 md:space-y-12">
+                    <div class="image-container">
+                        <img src="https://github.com/SiddhardhaDev/Project-NOVA/raw/main/ChatGPT%20Image%20Jun%203%2C%202025%2C%2006_43_56%20PM.png" alt="Project NOVA Robot Exterior View" class="rounded-lg">
+                        <p class="text-center text-xs md:text-sm text-stone-500 mt-2">A comprehensive exterior view of Project NOVA, highlighting its robust tracked chassis and the versatile hydraulic arm in its resting position.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-4xl">
+                        <div class="content-placeholder h-64 md:h-80">
+                            <p class="text-stone-700 font-semibold text-base md:text-lg">Conceptual Interior View<br><span class="text-xs md:text-sm text-stone-500">An illustration showing the organized internal components: battery, Jetson, motors, etc.</span></p>
+                        </div>
+                        <div class="content-placeholder h-64 md:h-80">
+                            <p class="text-stone-700 font-semibold text-base md:text-lg">Conceptual Circuit Board (PCB)<br><span class="text-xs md:text-sm text-stone-500">A detailed view of Project NOVA's custom 4-layer Power Distribution Board.</span></p>
+                        </div>
+                    </div>
+                    <p class="text-center text-base text-stone-600 max-w-3xl mx-auto mt-4 md:mt-8">The robot's compact yet powerful architecture is meticulously designed for optimal performance, ease of maintenance, and long-term reliability. The exterior design emphasizes stability, maneuverability across diverse terrains, and an approachable appearance that makes it a welcome addition to any setting.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="mechanical" class="py-12 md:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Mechanical Systems: The Foundation of Project NOVA's Strength</h2>
+                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA’s physical structure is a masterpiece of engineering, combining industrial-grade robustness with thoughtful design. It features a high-torque tracked chassis for unparalleled mobility and a powerful hydraulic arm for heavy lifting, all dynamically balanced by intelligent stabilizers. This ensures Project NOVA can navigate varied environments, including steep inclines, with unwavering stability and precision.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="card p-5">
+                        <h3 class="text-xl font-semibold mb-3 text-stone-800">Key Components & Engineering Capabilities</h3>
+                        <ul class="space-y-3 text-sm md:text-base">
+                            <li class="flex items-start">
+                                <span class="list-dot font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Chassis & All-Terrain Mobility:</strong> Built on a sturdy 40cm diameter aluminum base, Project NOVA is propelled by four individually controlled 250W brushless DC motors. These motors drive custom-designed, rubberized tank tracks, engineered for superior traction and stability. This robust system allows Project NOVA to effortlessly climb $45^{\circ}$ slopes, traverse rough terrain, and clear low obstacles with remarkable ease, ensuring access to all areas.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="list-dot font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">High-Capacity Hydraulic Arm:</strong> The core of Project NOVA's lifting prowess is a powerful 1500N linear hydraulic actuator. This arm is capable of lifting substantial payloads up to 100 kg (equivalent to over 220 lbs) and extending to a reach of 2 meters. Its soft-padded gripper is meticulously designed to handle both heavy items like large water bottles and delicate interactions, such as precisely placing an RFID card or activating a small button.</div>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="list-dot font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Dynamic Stabilization System:</strong> Four strategically placed 900N linear actuators function as dynamic stabilizers. These actuators intelligently extend and retract to continuously adjust Project NOVA's center of gravity, counterbalancing heavy loads and actively leveling the chassis. This critical system ensures unwavering stability on uneven terrain, during steep ascents or descents, and throughout the precise movements of the hydraulic arm.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="list-dot font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Integrated Internal Cargo Bay:</strong> A spacious 40cm diameter internal cargo bay is seamlessly integrated into Project NOVA's design. This secure compartment is perfectly sized to stow a standard 20L water bottle or an equivalent payload, keeping items safe and stable during transport across any terrain.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4 text-stone-800">Actuator Force Comparison</h3>
+                        <div class="chart-container">
+                            <canvas id="actuatorChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs md:text-sm text-stone-600 mt-4">A clear visualization of the maximum force output capabilities of Project NOVA's primary hydraulic arm versus its stabilizing actuators, demonstrating their respective strengths.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-pipeline" class="py-12 md:py-20">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">AI & Perception Pipeline: Project NOVA's Intelligent Core</h2>
+                 <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA's intelligence is powered by a sophisticated, modular AI stack, leveraging the high-performance NVIDIA Jetson Orin NX. Its primary language for natural interaction is **Telugu**, ensuring seamless and intuitive communication. This comprehensive pipeline processes vast amounts of sensor data in real-time to understand its environment, interpret complex commands, and respond intelligently, enabling advanced tasks like precise smart dispenser interaction and safe navigation.</p>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center font-semibold text-base md:text-lg">
+                        <div id="stage-perception" class="ai-pipeline-stage">Perception Module</div>
+                        <div class="flex items-center justify-center text-xl md:text-2xl text-stone-400">→</div>
+                        <div id="stage-language" class="ai-pipeline-stage">Language & Logic Module</div>
+                    </div>
+                    
+                    <div id="details-perception" class="ai-details">
+                        <h4 class="font-bold text-lg md:text-xl mb-2 text-stone-800">Perception Module: Project NOVA's Eyes and Spatial Awareness</h4>
+                        <p class="text-sm md:text-base text-stone-600 mb-4">This module is Project NOVA's "eyes and ears," converting raw sensor data into rich, actionable information about the world. It's crucial for enabling Project NOVA to navigate diverse environments, identify objects, and interact precisely with its surroundings, such as a water dispenser.</p>
+                        <ul class="list-disc pl-5 space-y-2 text-sm md:text-base text-stone-700">
+                            <li><strong>Object Detection (YOLOv8):</strong> Project NOVA utilizes a highly optimized <strong class="font-semibold">YOLOv8</strong> deep learning model, accelerated by NVIDIA's TensorRT. This allows for real-time identification of objects like water bottles, furniture, obstacles, and even specific components of a dispenser interface from a high-resolution 4K camera feed. Its robust detection ensures Project NOVA can reliably locate and categorize items in varied lighting and environmental conditions.</li>
+                            <li><strong>Label Reading (PaddleOCR):</strong> For tasks requiring textual understanding, detected objects are intelligently cropped and fed into <strong class="font-semibold">PaddleOCR</strong>. This powerful Optical Character Recognition (OCR) system enables Project NOVA to read text on labels, identify specific dispenser instructions, or even recognize unique RFID card details, facilitating autonomous interaction with smart appliances.</li>
+                            <li><strong>Simultaneous Localization and Mapping (SLAM):</strong> Project NOVA builds a dynamic 3D map of its environment and simultaneously tracks its own position within that map. This is achieved by fusing data from a high-precision LiDAR sensor and an Inertial Measurement Unit (IMU) using advanced algorithms. This robust SLAM capability ensures precise localization and obstacle avoidance, allowing Project NOVA to navigate autonomously to known locations (like the water dispenser) and maintain situational awareness even on complex and uneven terrain, including steep hills.</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="details-language" class="ai-details">
+                        <h4 class="font-bold text-lg md:text-xl mb-2 text-stone-800">Language & Logic Module: Understanding and Responding</h4>
+                        <p class="text-sm md:text-base text-stone-600 mb-4">This module is the brain behind Project NOVA's natural interaction and complex task execution. It interprets human intent from spoken commands and translates them into a sequence of robotic actions, providing clear and helpful feedback to the user.</p>
+                        <ul class="list-disc pl-5 space-y-2 text-sm md:text-base text-stone-700">
+                           <li><strong>Speech-to-Text (Vosk ASR):</strong> An efficient, offline <strong class="font-semibold">Vosk ASR</strong> (Automatic Speech Recognition) model is integrated to recognize voice commands spoken in Telugu. This crucial feature enables users to interact with Project NOVA naturally and effortlessly, without requiring an internet connection, ensuring privacy and reliability.</li>
+                           <li><strong>Natural Language Processing (TeluguBERT):</strong> The recognized text from the STT module is then processed by a fine-tuned <strong class="font-semibold">TeluguBERT</strong> model. This advanced Natural Language Processing (NLP) system accurately parses the command, classifying the user's intent (e.g., "fetch water," "emergency stop," "go to kitchen") and extracting relevant parameters (e.g., "from the dispenser," "place the card.").</li>
+                           <li><strong>Text-to-Speech (Coqui TTS / eSpeak):</strong> To provide clear and natural auditory feedback, Project NOVA uses either <strong class="font-semibold">Coqui TTS</strong> or eSpeak to generate synthesized Telugu speech for responses, confirmations, and status updates. This ensures that users receive immediate and understandable communication from their robotic assistant.</li>
+                           <li><strong>Decision Logic & ROS2 Orchestration:</strong> A high-level task scheduler, running within the Robot Operating System 2 (ROS2) framework, receives the parsed command and orchestrates the entire sequence of actions. This intelligent decision logic coordinates all subsystems, from planning a precise path and controlling the hydraulic arm for dispenser interaction to managing power consumption and ensuring safe navigation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="controls" class="py-12 md:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Control Systems & Navigation: Precision and Stability</h2>
+                 <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA's sophisticated control systems are the backbone of its smooth, safe, and precise operation, especially when navigating challenging terrain under heavy loads. By fusing data from multiple sensors, Project NOVA achieves robust localization and unwavering stability, essential for executing complex tasks like fetching water or traversing a steep, rocky hill.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="card p-5">
+                         <h3 class="text-xl font-semibold mb-3 text-stone-800">Core Control Principles & Adaptive Behavior</h3>
+                        <ul class="space-y-3 text-sm md:text-base">
+                            <li class="flex items-start">
+                                <span class="list-dot font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">PID & Adaptive Control:</strong> Every motor and actuator on Project NOVA is governed by a finely tuned PID (Proportional-Integral-Derivative) controller, ensuring precise position, speed, and force control. Crucially, the system dynamically adapts to varying conditions, such as heavy loads or changing terrain (e.g., climbing a steep hill). By continuously monitoring current draw and sensor feedback, Project NOVA adjusts its control gains in real-time, guaranteeing smooth, stable, and efficient motion regardless of the challenge.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="list-dot font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Dynamic Load Balancing & Stability:</strong> When Project NOVA's hydraulic arm extends with a heavy payload (like a full 20L water bottle) or when the robot encounters an incline, the integrated IMU (Inertial Measurement Unit) immediately detects any shift in tilt or balance. The four stabilizer actuators then automatically and precisely extend or retract to actively shift the robot's center of gravity. This dynamic load balancing system prevents tipping, maintains optimal traction, and ensures unwavering equilibrium even on the most uneven surfaces.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="list-dot font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">ROS2 Runtime & Orchestration:</strong> All of Project NOVA's software modules operate as interconnected nodes within a robust Robot Operating System 2 (ROS2) framework. This provides real-time messaging, efficient task scheduling, and critical fault tolerance for the entire system. ROS2 is instrumental in coordinating the complex interplay between perception, planning, and execution, enabling Project NOVA to perform multi-step tasks seamlessly and reliably.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="list-dot font-bold mr-3">●</span>
+                                <div><strong class="font-semibold text-stone-700">Intelligent Terrain Response:</strong> Project NOVA continuously assesses its ground contact and the steepness of the incline. If the IMU senses a particularly steep slope or unstable ground, the control system intelligently reduces the speed of the tracked chassis. This adaptive response maintains optimal traction, prevents slipping, and ensures a safe and controlled ascent or descent, even on challenging rocky hillsides.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card p-5 text-center">
+                        <h3 class="text-xl font-semibold mb-4 text-stone-800">Sensor Fusion with Extended Kalman Filter (EKF)</h3>
+                        <p class="text-sm md:text-base text-stone-600 mb-4">For unparalleled robust SLAM (Simultaneous Localization and Mapping) and precise localization, Project NOVA employs an Extended Kalman Filter (EKF). This advanced algorithm intelligently combines asynchronous data streams from various sensors, ensuring highly accurate position tracking even when individual sensor readings might be noisy or intermittently unreliable.</p>
+                        <div class="space-y-2 text-sm md:text-base">
+                            <div class="bg-white p-3 rounded shadow">LiDAR Scans (Precise Distance Mapping)</div>
+                            <div class="text-xl font-bold text-orange-500">↓</div>
+                            <div class="bg-white p-3 rounded shadow">IMU Data (Accurate Orientation & Acceleration)</div>
+                             <div class="text-xl font-bold text-orange-500">↓</div>
+                            <div class="bg-white p-3 rounded shadow">Wheel Odometry (Relative Position & Speed)</div>
+                             <div class="my-2 text-2xl font-bold text-orange-500">→ EKF →</div>
+                            <div class="bg-orange-500 text-white font-bold p-4 rounded-lg shadow-lg">Highly Accurate Robot Pose (x, y, θ, velocity)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="power" class="py-12 md:py-20">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Power & Electronics: The Lifeblood of Project NOVA</h2>
+                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">A meticulously designed and robust power system is absolutely critical for Project NOVA's safe, reliable, and extended operation. It ensures the consistent delivery of high currents for demanding tasks like heavy lifting and provides long runtimes for fetching water from distant locations. Project NOVA achieves this with a high-capacity LiFePO₄ battery, a custom Power Distribution Board (PDB), and multiple layers of integrated safety features.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                     <div class="card p-5">
+                        <h3 class="text-xl font-semibold text-center mb-4 text-stone-800">Efficient Power Distribution Hierarchy</h3>
+                        <div class="chart-container">
+                            <canvas id="powerChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs md:text-sm text-stone-600 mt-4">The primary 24V battery power is efficiently stepped down and distributed across various voltage rails, ensuring stable and reliable power delivery tailored to the specific needs of each subsystem, from high-power motors to sensitive microcontrollers.</p>
+                     </div>
+                     <div class="card p-5">
+                        <h3 class="text-xl font-semibold text-center mb-4 text-stone-800">Battery Performance vs. Operational Load</h3>
+                         <div class="chart-container">
+                            <canvas id="batteryChart"></canvas>
+                        </div>
+                        <div class="mt-4 flex justify-center space-x-3 md:space-x-4">
+                            <button id="lightLoadBtn" class="btn-primary text-sm md:text-base">Light Load</button>
+                            <button id="heavyLoadBtn" class="btn-secondary text-sm md:text-base">Heavy Load</button>
+                        </div>
+                        <p class="text-center text-xs md:text-sm text-stone-600 mt-4">Understanding how different operational loads (e.g., idle vs. heavy lifting and climbing) impact battery life is crucial for mission planning and ensuring Project NOVA can complete its duties without interruption. The chart illustrates estimated battery drain under different scenarios.</p>
+                    </div>
+                </div>
+                <div class="mt-12 md:mt-16 bg-stone-100 p-5 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-3 text-stone-800">Key Power & Electronic Features</h3>
+                    <ul class="space-y-3 text-sm md:text-base text-stone-700">
+                        <li><strong class="font-semibold">High-Capacity LiFePO₄ Battery (24V 150Ah):</strong> Project NOVA is powered by a custom-built 24V, 150 Amp-hour (Ah) Lithium Iron Phosphate (LiFePO₄) battery pack. This choice is deliberate, offering superior benefits over other battery chemistries, including an exceptionally high cycle life (thousands of charge/discharge cycles), excellent thermal stability (reducing fire risk), and inherent safety, providing up to 14 hours of continuous operation under typical light loads.</li>
+                        <li><strong class="font-semibold">Advanced Smart Battery Management System (BMS):</strong> An intelligent BMS continuously monitors critical battery parameters including individual cell voltages, overall current draw, and temperature. In the event of any detected fault (e.g., overcharge, over-discharge, over-current, short circuit, or extreme temperature), the BMS features an emergency contactor for immediate and safe power cut-off, protecting both the robot and its environment.</li>
+                        <li><strong class="font-semibold">Dual-Redundant Power Rails:</strong> To ensure maximum reliability and prevent single-point failures, critical circuits such as the powerful drive motors and the hydraulic arm are fed by parallel 24V power rails. This redundancy means that if one power path experiences an issue, the other can maintain operation, enhancing Project NOVA's resilience.</li>
+                        <li><strong class="font-semibold">Custom 4-Layer Power Distribution Board (PCB):</strong> The heart of Project NOVA's electronics is a custom-designed 4-layer Printed Circuit Board. This sophisticated PCB integrates all voltage regulators, connectors, and microcontrollers. It features carefully designed isolated analog and digital grounds to minimize noise and enhanced creepage distances between high-voltage traces for superior electrical safety and reliability.</li>
+                        <li><strong class="font-semibold">Distributed Microcontroller Co-processing:</strong> Time-critical I/O operations, sensor interfacing, and network communication are offloaded from the main NVIDIA Jetson Orin NX processor to dedicated microcontrollers like the STM32 and ESP32. This distributed processing architecture ensures that the Jetson can dedicate its full power to complex AI computations, while the microcontrollers handle low-latency, real-time control tasks and robust wireless communication (Wi-Fi and Bluetooth).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="components" class="py-12 md:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Component Breakdown & Estimated Cost</h2>
+                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">This section provides a transparent and detailed list of the essential components required for Project NOVA's construction, along with their estimated prices in Indian Rupees (INR). This breakdown offers a clear view of the hardware investment and the advanced technologies integrated into building such a sophisticated autonomous assistant.</p>
+                
+                <div class="max-w-4xl mx-auto card p-5">
+                    <div class="mb-4">
+                        <input type="text" id="componentSearch" placeholder="Search components..." class="w-full p-2 md:p-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm md:text-base">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-stone-200">
+                            <thead class="table-header">
+                                <tr>
+                                    <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Component</th>
+                                    <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Qty</th>
+                                    <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Price (₹)</th>
+                                    <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Total (₹)</th>
+                                    <th class="px-4 py-2 md:px-6 md:py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody id="componentTableBody" class="bg-white divide-y divide-stone-200 text-sm md:text-base">
+                                <!-- Data will be injected here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 md:mt-6 text-right text-base md:text-lg font-bold text-stone-800">
+                        Total Estimated Cost: <span id="totalCost">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="future-vision" class="py-12 md:py-20">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Future Vision: The Evolution of Project NOVA</h2>
+                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA represents a significant leap forward in autonomous assistance, but its potential extends far beyond its current capabilities. We envision a future where Project NOVA continuously evolves, integrating new technologies and expanding its role to further enhance various applications and provide even greater support.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Enhanced Dexterity & Fine Manipulation</h3>
+                        <p class="text-sm text-stone-700">Future iterations could feature a multi-jointed, more dexterous robotic arm with a wider range of motion and finer manipulation capabilities. This would allow Project NOVA to perform even more intricate tasks, such as opening specific types of containers, handling delicate objects, or assisting with complex assembly activities.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Advanced Social & Emotional Intelligence</h3>
+                        <p class="text-sm text-stone-700">Integrating more sophisticated emotional AI could enable Project NOVA to understand and respond to human emotions, offering companionship, detecting distress, and providing proactive assistance. This would transform Project NOVA from a task-oriented robot into a truly empathetic companion.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Modular Attachments & Customization</h3>
+                        <p class="text-sm text-stone-700">A modular design philosophy could allow users to easily swap out or add specialized attachments. Imagine a gardening module for watering plants, a cleaning module for light tidying, or a specialized medical delivery module, making Project NOVA highly adaptable to individual needs.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Extended Range & Swarm Robotics</h3>
+                        <p class="text-sm text-stone-700">For larger properties or community assistance, Project NOVA could operate within a network of other autonomous units. This "swarm robotics" approach would enable collaborative task execution, covering wider areas, and providing comprehensive support across multiple households or a small community.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Integration with Smart Home Ecosystems</h3>
+                        <p class="text-sm text-stone-700">Seamless integration with existing smart home devices and IoT platforms would allow Project NOVA to control lights, thermostats, security systems, and other smart appliances, creating a fully interconnected and responsive environment tailored to user preferences.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Self-Charging & Maintenance</h3>
+                        <p class="text-sm text-stone-700">Future advancements could include autonomous self-charging capabilities, allowing Project NOVA to return to a charging dock when low on power. Additionally, predictive maintenance features could alert users to potential issues before they become critical, ensuring continuous operation and minimal downtime.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-white border-t border-stone-200">
+        <div class="container mx-auto px-4 sm:px-6 py-6 text-center text-stone-500">
+            <p class="text-sm md:text-base">&copy; 2025 Project NOVA.AI. All rights reserved. Empowering efficiency and safety through advanced robotics.</p>
         </div>
+    </footer>
 
-        <div class="card" style="margin-top:12px">
-          <h3>Notes to Repo</h3>
-          <ol>
-            <li>Commit convention: feat/, fix/, docs/, ci/</li>
-            <li>Large binary artifacts (models) stored in Git LFS</li>
-            <li>Use GitHub Actions to run unit tests & build Docker image</li>
-          </ol>
-          <div class="hr"></div>
-          <h4>Contact</h4>
-          <p class="small-muted">Owner: <strong>Siddhardha</strong> (V). Update repo & push to GitHub Pages.</p>
-        </div>
-      </aside>
-    </div>
 
-    <div class="footer">
-      <div>Generated: Aug 15, 2025 — Project NOVA single-file developer portal. Ask me to append more code blocks or to export a ZIP of all files (I will generate the content here so you can copy/paste into files).</div>
-    </div>
-  </div>
+    <script>
+        // Gemini API configuration
+        const API_KEY = ""; // Leave as-is, Canvas will provide at runtime.
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
-  <script>
-  // ---------- Long JS: interactive behavior & copy helpers ----------
-  (function(){
-    // tabs
-    document.querySelectorAll('.tab').forEach(t=>{
-      t.addEventListener('click',()=>{
-        document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-        t.classList.add('active');
-        const name = t.getAttribute('data-tab');
-        ['teleop','logs','maps','models'].forEach(id=>{
-          document.getElementById(id).style.display = (id===name)?'block':'none';
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Text-to-Speech (Telugu Summary) Logic - REMOVED ---
+            // All related elements and functions for text-to-speech have been removed.
+
+            // --- Chart.js Initialization (Existing Logic) ---
+            const actuatorCtx = document.getElementById('actuatorChart').getContext('2d');
+            new Chart(actuatorCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Hydraulic Arm', 'Stabilizer Actuators'],
+                    datasets: [{
+                        label: 'Force (Newtons)',
+                        data: [1500, 900],
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.7)', /* orange-500 */
+                            'rgba(68, 64, 60, 0.7)'   /* stone-700 */
+                        ],
+                        borderColor: [
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(68, 64, 60, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Maximum Force Output', color: '#44403C' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Force (N)', color: '#78716C' },
+                            ticks: { color: '#78716C' },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        x: {
+                            ticks: { color: '#78716C' },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        }
+                    }
+                }
+            });
+
+            const powerCtx = document.getElementById('powerChart').getContext('2d');
+            new Chart(powerCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['24V (Motors/Arm)', '12V (Control)', '5V (Microcontrollers)'],
+                    datasets: [{
+                        label: 'Power Distribution',
+                        data: [70, 20, 10], // Representative percentages
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.8)', /* orange-500 */
+                            'rgba(68, 64, 60, 0.8)',   /* stone-700 */
+                            'rgba(120, 113, 108, 0.8)' /* stone-500 */
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            position: 'bottom',
+                            labels: {
+                                color: '#78716C'
+                            }
+                        },
+                        title: { display: true, text: 'Main Bus (24V) Step-Down Allocation', color: '#44403C' }
+                    }
+                }
+            });
+
+            const lightLoadData = {
+                labels: Array.from({length: 15}, (_, i) => `${i}h`),
+                datasets: [{
+                    label: 'Battery % (Light Load)',
+                    data: [100, 94, 88, 82, 76, 70, 64, 58, 52, 46, 40, 34, 28, 22, 16],
+                    borderColor: '#F97316', /* orange-500 */
+                    backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            };
+
+            const heavyLoadData = {
+                labels: Array.from({length: 5}, (_, i) => `${i}h`),
+                datasets: [{
+                    label: 'Battery % (Heavy Load)',
+                    data: [100, 78, 56, 34, 12],
+                    borderColor: '#44403C', /* stone-700 */
+                    backgroundColor: 'rgba(68, 64, 60, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            };
+
+            const batteryCtx = document.getElementById('batteryChart').getContext('2d');
+            const batteryChart = new Chart(batteryCtx, {
+                type: 'line',
+                data: lightLoadData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Estimated Runtime', color: '#44403C' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: 'Battery Charge (%)', color: '#78716C' },
+                            ticks: { color: '#78716C' },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Time (Hours)', color: '#78716C' },
+                            ticks: { color: '#78716C' },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('lightLoadBtn').addEventListener('click', () => {
+                batteryChart.data = lightLoadData;
+                batteryChart.update();
+            });
+
+            document.getElementById('heavyLoadBtn').addEventListener('click', () => {
+                batteryChart.data = heavyLoadData;
+                batteryChart.update();
+            });
+            
+            const stages = {
+                perception: document.getElementById('stage-perception'),
+                language: document.getElementById('stage-language')
+            };
+            const details = {
+                perception: document.getElementById('details-perception'),
+                language: document.getElementById('details-language')
+            };
+
+            Object.keys(stages).forEach(key => {
+                stages[key].addEventListener('click', () => {
+                    const detailEl = details[key];
+                    const is_open = detailEl.classList.contains('open');
+                    
+                    Object.values(details).forEach(d => d.classList.remove('open'));
+
+                    if (!is_open) {
+                       detailEl.classList.add('open');
+                    }
+                });
+            });
+
+            // Component Data and Table Logic
+            const components = [
+                { name: "Jetson Orin NX 16GB", qty: 1, price: 60000, total: 60000, description: "AI computing unit with 100+ TOPS" },
+                { name: "IZI One Lite 4K Camera", qty: 1, price: 6000, total: 6000, description: "Main object detection camera" },
+                { name: "Angelite 1080p Autofocus Camera", qty: 1, price: 2600, total: 2600, description: "OCR & backup vision" },
+                { name: "FDUCE M160 Microphone", qty: 1, price: 1600, total: 1600, description: "Voice assistant mic" },
+                { name: "RPLIDAR A1", qty: 1, price: 8000, total: 8000, description: "For SLAM/navigation" },
+                { name: "9DOF IMU Sensor", qty: 1, price: 1200, total: 1200, description: "Orientation/stability tracking" },
+                { name: "Planetary Brushless Gear Motor (9.55Nm)", qty: 4, price: 8000, total: 32000, description: "For tank drive movement" },
+                { name: "Custom CNC Tank Wheels", qty: 4, price: 1500, total: 6000, description: "Wheel system with high load" },
+                { name: "3D Printed Tank Belts", qty: 2, price: 1000, total: 2000, description: "Belt-based traction" },
+                { name: "Hydraulic Linear Actuator (1500N, Arm)", qty: 1, price: 5500, total: 5500, description: "Main lifting actuator" },
+                { name: "900N Linear Actuators (Stabilizers)", qty: 4, price: 3200, total: 12800, description: "Bottom stabilizers" },
+                { name: "LiFePO4 Battery 24V 150Ah (custom)", qty: 1, price: 6750, total: 6750, description: "Power for 12hr+ runtime" },
+                { name: "Smart BMS with GPIO", qty: 1, price: 3000, total: 3000, description: "Battery safety system" },
+                { name: "60V to 24V Buck Converter", qty: 1, price: 1500, total: 1500, description: "Motor voltage regulation (updated to 24V system)" },
+                { name: "24V to 5V/12V Converters", qty: 2, price: 1000, total: 2000, description: "For logic & sensors" },
+                { name: "STM32 Microcontroller", qty: 1, price: 1200, total: 1200, description: "Sensor interfacing" },
+                { name: "ESP32 Dev Board", qty: 1, price: 900, total: 900, description: "Wi-Fi + BT logic" },
+                { name: "Custom 4-Layer PCB", qty: 1, price: 2500, total: 2500, description: "Core board for power and logic" },
+                { name: "INA219/ACS712 Current Sensors", qty: 2, price: 600, total: 1200, description: "Power monitoring" },
+                { name: "IP-rated Cables & Connectors", qty: 1, price: 1500, total: 1500, description: "Waterproof & rugged wiring" },
+                { name: "Aluminum Chassis Frame", qty: 1, price: 8000, total: 8000, description: "Supports heavy components" },
+                { name: "Voice Output Module (Speaker)", qty: 1, price: 500, total: 500, description: "For TTS responses" },
+                { name: "Misc Hardware (Fasteners, Hinges, etc.)", qty: 1, price: 2000, total: 2000, description: "Assembly items" }
+            ];
+
+            const componentTableBody = document.getElementById('componentTableBody');
+            const componentSearch = document.getElementById('componentSearch');
+            const totalCostSpan = document.getElementById('totalCost');
+
+            function renderComponents(filterText = '') {
+                componentTableBody.innerHTML = '';
+                let currentTotalCost = 0;
+                const filteredComponents = components.filter(item => 
+                    item.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                    item.description.toLowerCase().includes(filterText.toLowerCase())
+                );
+
+                filteredComponents.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-stone-50';
+                    row.innerHTML = `
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-stone-900">${item.name}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-700">${item.qty}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-700">₹${item.price.toLocaleString('en-IN')}</td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-700">₹${item.total.toLocaleString('en-IN')}</td>
+                        <td class="px-4 py-3 whitespace-normal text-sm text-stone-700">${item.description}</td>
+                    `;
+                    componentTableBody.appendChild(row);
+                    currentTotalCost += item.total;
+                });
+                totalCostSpan.textContent = `₹${currentTotalCost.toLocaleString('en-IN')}`;
+            }
+
+            componentSearch.addEventListener('keyup', (event) => {
+                renderComponents(event.target.value);
+            });
+
+            // Initial render
+            renderComponents();
         });
-      });
-    });
-
-    // Teleop simulation
-    const lin = document.getElementById('lin');
-    const ang = document.getElementById('ang');
-    const log = document.getElementById('teleop-log');
-    document.getElementById('send-cmd').addEventListener('click',()=>{
-      const l=lin.value, a=ang.value;
-      const t = new Date().toLocaleTimeString();
-      log.textContent = `[${t}] PUBLISH /cmd_vel -> linear: ${l} m/s, angular: ${a} rad/s\\n` + log.textContent;
-      // Here you could integrate rosbridge websockets to actually publish
-    });
-
-    // copyAll helper - extracts sections and copies to clipboard (simulated)
-    window.copyAll = function(kind){
-      let text = '';
-      if(kind==='ros2') {
-        text = document.querySelector('pre.code-box').innerText;
-      } else if(kind==='firmware') {
-        // find firmware block by searching for main.c signature
-        const blocks = Array.from(document.querySelectorAll('pre.code-box'));
-        const block = blocks.find(b=>b.innerText.includes('firmware/stm32/src/main.c'));
-        text = block?block.innerText:'Firmware not found';
-      } else if(kind==='docker') {
-        text = Array.from(document.querySelectorAll('pre.code-box')).map(b=>b.innerText).join('\\n\\n---\\n\\n');
-      } else if(kind==='yolo') {
-        text = Array.from(document.querySelectorAll('pre.code-box')).map(b=>b.innerText).join('\\n\\n---\\n\\n');
-      }
-      navigator.clipboard.writeText(text).then(()=>alert('Copied to clipboard (long).'), ()=>alert('Copy failed.'));
-    };
-
-    // download all button (simulate generating a zip)
-    document.getElementById('download-all').addEventListener('click', async ()=>{
-      alert('I cannot create binary ZIP in this HTML page, but I can generate all files as text blocks for you to copy. Use the "Copy" buttons to put data in clipboard.');
-    });
-
-    // simulated sys log filler
-    const sys = document.getElementById('sys-log');
-    function addSys(msg){
-      sys.textContent = `[${new Date().toLocaleTimeString()}] ${msg}\\n` + sys.textContent;
-    }
-    addSys('System portal loaded. ROS2 skeleton ready.');
-
-  })();
-  </script>
+    </script>
 </body>
 </html>
