@@ -237,7 +237,7 @@
                     </div>
                     <div class="card p-5">
                         <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">2. Robust All-Terrain Navigation</h3>
-                        <p class="text-sm text-stone-700">With its powerful tracked chassis and terrain-stabilizing actuators, Project NOVA autonomously navigates the environment. Utilizing simultaneous localization and mapping (SLAM) from LiDAR and IMU data, it precisely tracks its position and avoids dynamic obstacles. Its adaptive control system ensures smooth ascent and descent on slopes up to $45^{\circ}$, maintaining stability even on uneven ground.</p>
+                        <p class="text-sm text-stone-700">With its powerful tracked chassis and terrain-stabilizing actuators, Project NOVA autonomously navigates the environment. Utilizing simultaneous localization and mapping (SLAM) from LiDAR and IMU data, it precisely tracks its position and avoids dynamic obstacles. Its adaptive control system ensures smooth ascent and descent on slopes up to 45&deg;, maintaining stability even on uneven ground.</p>
                     </div>
                     <div class="card p-5">
                         <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">3. Precise Smart Dispenser Interaction</h3>
@@ -270,16 +270,27 @@
                         <p class="text-center text-xs md:text-sm text-stone-500 mt-2">A comprehensive exterior view of Project NOVA, highlighting its robust tracked chassis and the versatile hydraulic arm in its resting position.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-4xl">
-                        <div class="card p-4 h-64 md:h-80 flex flex-col justify-between">
-                            <img src="https://raw.githubusercontent.com/SiddhardhaDev/Project-NOVA/main/Gemini_Generated_Image_y6stuky6stuky6st.png" alt="Conceptual Climbing View" class="w-full h-full object-cover rounded-md mx-auto">
-                            <p class="mt-2 text-center text-stone-700 font-semibold text-sm md:text-base">Conceptual Climbing View<br><span class="text-xs md:text-sm text-stone-500">Image of the robot climbing a terrain.</span></p>
-                        </div>
-                        <div class="card p-4 h-64 md:h-80 flex flex-col justify-between">
-                            <img src="https://raw.githubusercontent.com/SiddhardhaDev/Project-NOVA/main/Gemini_Generated_Image_lczid6lczid6lczi.png" alt="Conceptual Night View" class="w-full h-full object-cover rounded-md mx-auto">
-                            <p class="mt-2 text-center text-stone-700 font-semibold text-sm md:text-base">Conceptual Night View<br><span class="text-xs md:text-sm text-stone-500">An illustration of the robot working at night.</span></p>
-                        </div>
-                    </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-4xl">
+                            <div class="card p-4 flex flex-col justify-between">
+                                <img src="https://raw.githubusercontent.com/SiddhardhaDev/Project-NOVA/main/Gemini_Generated_Image_y6stuky6stuky6st.png" 
+                                alt="Conceptual Climbing View"
+                                class="w-full h-auto object-contain rounded-md mx-auto">
+                                <p class="mt-2 text-center text-stone-700 font-semibold text-sm md:text-base">
+            Conceptual Climbing View<br>
+            <span class="text-xs md:text-sm text-stone-500">Image of the robot climbing a terrain.</span>
+        </p>
+    </div>
+    <div class="card p-4 flex flex-col justify-between">
+        <img src="https://raw.githubusercontent.com/SiddhardhaDev/Project-NOVA/main/Gemini_Generated_Image_lczid6lczid6lczi.png" 
+             alt="Conceptual Night View" 
+             class="w-full h-auto object-contain rounded-md mx-auto">
+        <p class="mt-2 text-center text-stone-700 font-semibold text-sm md:text-base">
+            Conceptual Night View<br>
+            <span class="text-xs md:text-sm text-stone-500">An illustration of the robot working at night.</span>
+        </p>
+    </div>
+</div>
+
 
                     <p class="text-center text-base text-stone-600 max-w-3xl mx-auto mt-4 md:mt-8">The robot's compact yet powerful architecture is meticulously designed for optimal performance, ease of maintenance, and long-term reliability. The exterior design emphasizes stability, maneuverability across diverse terrains, and an approachable appearance that makes it a welcome addition to any setting.</p>
                 </div>
@@ -696,9 +707,9 @@
                 { name: "3D Printed Tank Belts", qty: 2, price: 1000, total: 2000, description: "Belt-based traction" },
                 { name: "Hydraulic Linear Actuator (1500N, Arm)", qty: 1, price: 5500, total: 5500, description: "Main lifting actuator" },
                 { name: "900N Linear Actuators (Stabilizers)", qty: 4, price: 3200, total: 12800, description: "Bottom stabilizers" },
-                { name: "LiFePO4 Battery 24V 150Ah (custom)", qty: 1, price: 6750, total: 6750, description: "Power for 12hr+ runtime" },
+                { name: "LiFePO4 Battery 24V 150Ah (custom)", qty: 1, price: 20000, total: 20000, description: "Power for 12hr+ runtime" },
                 { name: "Smart BMS with GPIO", qty: 1, price: 3000, total: 3000, description: "Battery safety system" },
-                { name: "60V to 24V Buck Converter", qty: 1, price: 1500, total: 1500, description: "Motor voltage regulation (updated to 24V system)" },
+                { name: "24V Buck Converter", qty: 1, price: 1500, total: 1500, description: "Motor voltage regulation (24V system)" },
                 { name: "24V to 5V/12V Converters", qty: 2, price: 1000, total: 2000, description: "For logic & sensors" },
                 { name: "STM32 Microcontroller", qty: 1, price: 1200, total: 1200, description: "Sensor interfacing" },
                 { name: "ESP32 Dev Board", qty: 1, price: 900, total: 900, description: "Wi-Fi + BT logic" },
@@ -748,4 +759,3 @@
     </script>
 </body>
 </html>
-
