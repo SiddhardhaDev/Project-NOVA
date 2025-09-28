@@ -9,6 +9,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Original Color Palette: Calm Harmony (Orange & Grayish) -->
+    <!-- Background: #F5F5F4 (stone-100) -->
+    <!-- Dark Text: #44403C (stone-700) -->
+    <!-- Accent: #F97316 (orange-500) -->
+    <!-- Medium Text/Subheadings: #78716C (stone-500) -->
+    <!-- Light Hover: #FEF3C7 (amber-100) -->
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -157,13 +164,15 @@
         <nav class="container mx-auto px-4 sm:px-6 py-3">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex justify-between items-center w-full md:w-auto mb-2 md:mb-0">
-                    <a href="#overview" class="text-2xl font-bold text-stone-800">Project NOVA</a>
+                    <a href="#overview" class="text-2xl font-bold text-stone-800">Project NOVA.AI</a>
                     <div class="md:hidden flex items-center">
+                        <!-- Removed mobile play/stop buttons -->
                         <button id="menu-btn" class="text-stone-700 focus:outline-none p-2 rounded-md hover:bg-stone-200 ml-2">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                         </button>
                     </div>
                 </div>
+                <!-- Desktop navigation -->
                 <div class="hidden md:flex space-x-4 lg:space-x-8 items-center">
                     <a href="#overview" class="nav-link">Overview</a>
                     <a href="#use-case" class="nav-link">Use Case</a>
@@ -174,17 +183,19 @@
                     <a href="#power" class="nav-link">Power & Electronics</a>
                     <a href="#components" class="nav-link">Components & Cost</a>
                     <a href="#future-vision" class="nav-link">Future Vision</a>
-                    </div>
+                    <!-- Removed desktop play/stop buttons -->
+                </div>
+                <!-- Mobile navigation menu -->
                 <div id="mobile-menu" class="hidden md:hidden mt-4 w-full space-y-2 bg-white rounded-lg shadow-md p-4">
-                    <a href="#overview" class="block py-2 px-4 text-sm mobile-menu-item rounded">Overview</a>
-                    <a href="#use-case" class="block py-2 px-4 text-sm mobile-menu-item rounded">Use Case</a>
-                    <a href="#design" class="block py-2 px-4 text-sm mobile-menu-item rounded">Design</a>
-                    <a href="#mechanical" class="block py-2 px-4 text-sm mobile-menu-item rounded">Mechanical</a>
-                    <a href="#ai-pipeline" class="block py-2 px-4 text-sm mobile-menu-item rounded">AI Pipeline</a>
-                    <a href="#controls" class="block py-2 px-4 text-sm mobile-menu-item rounded">Controls</a>
-                    <a href="#power" class="block py-2 px-4 text-sm mobile-menu-item rounded">Power & Electronics</a>
-                    <a href="#components" class="block py-2 px-4 text-sm mobile-menu-item rounded">Components & Cost</a>
-                    <a href="#future-vision" class="block py-2 px-4 text-sm mobile-menu-item rounded">Future Vision</a>
+                     <a href="#overview" class="block py-2 px-4 text-sm mobile-menu-item rounded">Overview</a>
+                     <a href="#use-case" class="block py-2 px-4 text-sm mobile-menu-item rounded">Use Case</a>
+                     <a href="#design" class="block py-2 px-4 text-sm mobile-menu-item rounded">Design</a>
+                     <a href="#mechanical" class="block py-2 px-4 text-sm mobile-menu-item rounded">Mechanical</a>
+                     <a href="#ai-pipeline" class="block py-2 px-4 text-sm mobile-menu-item rounded">AI Pipeline</a>
+                     <a href="#controls" class="block py-2 px-4 text-sm mobile-menu-item rounded">Controls</a>
+                     <a href="#power" class="block py-2 px-4 text-sm mobile-menu-item rounded">Power & Electronics</a>
+                     <a href="#components" class="block py-2 px-4 text-sm mobile-menu-item rounded">Components & Cost</a>
+                     <a href="#future-vision" class="block py-2 px-4 text-sm mobile-menu-item rounded">Future Vision</a>
                 </div>
             </div>
         </nav>
@@ -261,7 +272,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-4xl">
                         <div class="card p-4 h-64 md:h-80 flex flex-col justify-between">
-                            <img src="image_ac8410.jpg" alt="Conceptual Climbing View" class="w-full h-4/5 object-cover rounded-md mx-auto">
+                            <img src="https://raw.githubusercontent.com/SiddhardhaDev/Project-NOVA/main/Gemini_Generated_Image_lczid6lczid6lczi.png" alt="Conceptual Climbing View" class="w-full h-4/5 object-cover rounded-md mx-auto">
                             <p class="mt-2 text-center text-stone-700 font-semibold text-sm md:text-base">Conceptual Climbing View<br><span class="text-xs md:text-sm text-stone-500">Image of the robot climbing a terrain.</span></p>
                         </div>
                         <div class="card p-4 h-64 md:h-80 flex flex-col justify-between">
@@ -315,13 +326,14 @@
         <section id="ai-pipeline" class="py-12 md:py-20">
             <div class="container mx-auto px-4 sm:px-6">
                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">AI & Perception Pipeline: Project NOVA's Intelligent Core</h2>
-                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA's intelligence is powered by a sophisticated, modular AI stack, leveraging the high-performance NVIDIA Jetson Orin NX. Its primary language for natural interaction is **Telugu**, ensuring seamless and intuitive communication. This comprehensive pipeline processes vast amounts of sensor data in real-time to understand its environment, interpret complex commands, and respond intelligently, enabling advanced tasks like precise smart dispenser interaction and safe navigation.</p>
+                 <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA's intelligence is powered by a sophisticated, modular AI stack, leveraging the high-performance NVIDIA Jetson Orin NX. Its primary language for natural interaction is **Telugu**, ensuring seamless and intuitive communication. This comprehensive pipeline processes vast amounts of sensor data in real-time to understand its environment, interpret complex commands, and respond intelligently, enabling advanced tasks like precise smart dispenser interaction and safe navigation.</p>
                 <div class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center font-semibold text-base md:text-lg">
                         <div id="stage-perception" class="ai-pipeline-stage">Perception Module</div>
                         <div class="flex items-center justify-center text-xl md:text-2xl text-stone-400">→</div>
                         <div id="stage-language" class="ai-pipeline-stage">Language & Logic Module</div>
                     </div>
+                    
                     <div id="details-perception" class="ai-details">
                         <h4 class="font-bold text-lg md:text-xl mb-2 text-stone-800">Perception Module: Project NOVA's Eyes and Spatial Awareness</h4>
                         <p class="text-sm md:text-base text-stone-600 mb-4">This module is Project NOVA's "eyes and ears," converting raw sensor data into rich, actionable information about the world. It's crucial for enabling Project NOVA to navigate diverse environments, identify objects, and interact precisely with its surroundings, such as a water dispenser.</p>
@@ -331,6 +343,7 @@
                             <li><strong>Simultaneous Localization and Mapping (SLAM):</strong> Project NOVA builds a dynamic 3D map of its environment and simultaneously tracks its own position within that map. This is achieved by fusing data from a high-precision LiDAR sensor and an Inertial Measurement Unit (IMU) using advanced algorithms. This robust SLAM capability ensures precise localization and obstacle avoidance, allowing Project NOVA to navigate autonomously to known locations (like the water dispenser) and maintain situational awareness even on complex and uneven terrain, including steep hills.</li>
                         </ul>
                     </div>
+                    
                     <div id="details-language" class="ai-details">
                         <h4 class="font-bold text-lg md:text-xl mb-2 text-stone-800">Language & Logic Module: Understanding and Responding</h4>
                         <p class="text-sm md:text-base text-stone-600 mb-4">This module is the brain behind Project NOVA's natural interaction and complex task execution. It interprets human intent from spoken commands and translates them into a sequence of robotic actions, providing clear and helpful feedback to the user.</p>
@@ -351,7 +364,7 @@
                  <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA's sophisticated control systems are the backbone of its smooth, safe, and precise operation, especially when navigating challenging terrain under heavy loads. By fusing data from multiple sensors, Project NOVA achieves robust localization and unwavering stability, essential for executing complex tasks like fetching water or traversing a steep, rocky hill.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
                     <div class="card p-5">
-                        <h3 class="text-xl font-semibold mb-3 text-stone-800">Core Control Principles & Adaptive Behavior</h3>
+                         <h3 class="text-xl font-semibold mb-3 text-stone-800">Core Control Principles & Adaptive Behavior</h3>
                         <ul class="space-y-3 text-sm md:text-base">
                             <li class="flex items-start">
                                 <span class="list-dot font-bold mr-3">●</span>
@@ -378,9 +391,9 @@
                             <div class="bg-white p-3 rounded shadow">LiDAR Scans (Precise Distance Mapping)</div>
                             <div class="text-xl font-bold text-orange-500">↓</div>
                             <div class="bg-white p-3 rounded shadow">IMU Data (Accurate Orientation & Acceleration)</div>
-                            <div class="text-xl font-bold text-orange-500">↓</div>
+                             <div class="text-xl font-bold text-orange-500">↓</div>
                             <div class="bg-white p-3 rounded shadow">Wheel Odometry (Relative Position & Speed)</div>
-                            <div class="my-2 text-2xl font-bold text-orange-500">→ EKF →</div>
+                             <div class="my-2 text-2xl font-bold text-orange-500">→ EKF →</div>
                             <div class="bg-orange-500 text-white font-bold p-4 rounded-lg shadow-lg">Highly Accurate Robot Pose (x, y, θ, velocity)</div>
                         </div>
                     </div>
@@ -399,10 +412,10 @@
                             <canvas id="powerChart"></canvas>
                         </div>
                         <p class="text-center text-xs md:text-sm text-stone-600 mt-4">The primary 24V battery power is efficiently stepped down and distributed across various voltage rails, ensuring stable and reliable power delivery tailored to the specific needs of each subsystem, from high-power motors to sensitive microcontrollers.</p>
-                    </div>
-                    <div class="card p-5">
+                     </div>
+                     <div class="card p-5">
                         <h3 class="text-xl font-semibold text-center mb-4 text-stone-800">Battery Performance vs. Operational Load</h3>
-                        <div class="chart-container">
+                         <div class="chart-container">
                             <canvas id="batteryChart"></canvas>
                         </div>
                         <div class="mt-4 flex justify-center space-x-3 md:space-x-4">
@@ -429,6 +442,7 @@
             <div class="container mx-auto px-4 sm:px-6">
                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Component Breakdown & Estimated Cost</h2>
                 <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">This section provides a transparent and detailed list of the essential components required for Project NOVA's construction, along with their estimated prices in Indian Rupees (INR). This breakdown offers a clear view of the hardware investment and the advanced technologies integrated into building such a sophisticated autonomous assistant.</p>
+                
                 <div class="max-w-4xl mx-auto card p-5">
                     <div class="mb-4">
                         <input type="text" id="componentSearch" placeholder="Search components..." class="w-full p-2 md:p-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm md:text-base">
@@ -445,7 +459,8 @@
                                 </tr>
                             </thead>
                             <tbody id="componentTableBody" class="bg-white divide-y divide-stone-200 text-sm md:text-base">
-                                </tbody>
+                                <!-- Data will be injected here by JavaScript -->
+                            </tbody>
                         </table>
                     </div>
                     <div class="mt-4 md:mt-6 text-right text-base md:text-lg font-bold text-stone-800">
@@ -458,100 +473,76 @@
         <section id="future-vision" class="py-12 md:py-20">
             <div class="container mx-auto px-4 sm:px-6">
                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 section-heading">Future Vision: The Evolution of Project NOVA</h2>
-                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA is not just a concept; it is a foundation for an advanced, multi-purpose robotic platform. Our future vision focuses on expanding its capabilities to meet a wider range of industrial and personal needs, pushing the boundaries of autonomous robotics.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <p class="text-base text-stone-600 max-w-3xl mx-auto mb-8 md:mb-12">Project NOVA represents a significant leap forward in autonomous assistance, but its potential extends far beyond its current capabilities. We envision a future where Project NOVA continuously evolves, integrating new technologies and expanding its role to further enhance various applications and provide even greater support.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <div class="card p-5">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-2">Advanced Modular Tooling</h3>
-                        <p class="text-sm text-stone-700">The current hydraulic arm will evolve into a modular interface capable of hot-swapping different tools: specialized drills for site work, sensor arrays for environmental monitoring (e.g., air quality, radiation), and high-precision manipulators for delicate assembly tasks.</p>
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Enhanced Dexterity & Fine Manipulation</h3>
+                        <p class="text-sm text-stone-700">Future iterations could feature a multi-jointed, more dexterous robotic arm with a wider range of motion and finer manipulation capabilities. This would allow Project NOVA to perform even more intricate tasks, such as opening specific types of containers, handling delicate objects, or assisting with complex assembly activities.</p>
                     </div>
                     <div class="card p-5">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-2">Human-Robot Teamwork</h3>
-                        <p class="text-sm text-stone-700">Future iterations will focus on sophisticated **collaborative robotics** (Cobots). Project NOVA will be able to work side-by-side with humans in construction, manufacturing, and farming, predicting human intent and safely coordinating its heavy-lift actions to maximize efficiency.</p>
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Advanced Social & Emotional Intelligence</h3>
+                        <p class="text-sm text-stone-700">Integrating more sophisticated emotional AI could enable Project NOVA to understand and respond to human emotions, offering companionship, detecting distress, and providing proactive assistance. This would transform Project NOVA from a task-oriented robot into a truly empathetic companion.</p>
                     </div>
                     <div class="card p-5">
-                        <h3 class="text-xl font-semibold text-stone-800 mb-2">Multi-Robot Swarm Control</h3>
-                        <p class="text-sm text-stone-700">We plan to develop a system for orchestrating a **fleet** of Project NOVAs. This will allow for complex, large-scale tasks—like transporting massive loads or surveying large land areas—to be executed in parallel, where robots share data and autonomously divide the workload.</p>
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Modular Attachments & Customization</h3>
+                        <p class="text-sm text-stone-700">A modular design philosophy could allow users to easily swap out or add specialized attachments. Imagine a gardening module for watering plants, a cleaning module for light tidying, or a specialized medical delivery module, making Project NOVA highly adaptable to individual needs.</p>
                     </div>
-                </div>
-                <div class="mt-12 md:mt-16 text-center">
-                    <p class="text-base text-stone-700 max-w-3xl mx-auto">Project NOVA is poised to become the standard for robust, intelligent, and autonomous heavy-lift assistance in the next decade.</p>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Extended Range & Swarm Robotics</h3>
+                        <p class="text-sm text-stone-700">For larger properties or community assistance, Project NOVA could operate within a network of other autonomous units. This "swarm robotics" approach would enable collaborative task execution, covering wider areas, and providing comprehensive support across multiple households or a small community.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Integration with Smart Home Ecosystems</h3>
+                        <p class="text-sm text-stone-700">Seamless integration with existing smart home devices and IoT platforms would allow Project NOVA to control lights, thermostats, security systems, and other smart appliances, creating a fully interconnected and responsive environment tailored to user preferences.</p>
+                    </div>
+                    <div class="card p-5">
+                        <h3 class="text-lg md:text-xl font-semibold text-stone-800 mb-2">Self-Charging & Maintenance</h3>
+                        <p class="text-sm text-stone-700">Future advancements could include autonomous self-charging capabilities, allowing Project NOVA to return to a charging dock when low on power. Additionally, predictive maintenance features could alert users to potential issues before they become critical, ensuring continuous operation and minimal downtime.</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-
-    <footer class="py-8 md:py-12 bg-stone-800 text-white mt-12">
-        <div class="container mx-auto px-4 sm:px-6 text-center">
-            <p class="text-xl font-bold mb-3">Project NOVA</p>
-            <p class="text-sm text-stone-400">&copy; 2025 Autonomous Robotics Group. All rights reserved.</p>
-            <div class="mt-4 space-x-4 text-sm">
-                <a href="#overview" class="text-stone-300 hover:text-orange-500 transition">Home</a>
-                <a href="mailto:siddhardha.dev@example.com" class="text-stone-300 hover:text-orange-500 transition">Contact</a>
-            </div>
+    
+    <footer class="bg-white border-t border-stone-200">
+        <div class="container mx-auto px-4 sm:px-6 py-6 text-center text-stone-500">
+            <p class="text-sm md:text-base">&copy; 2025 Project NOVA.AI. All rights reserved. Empowering efficiency and safety through advanced robotics.</p>
         </div>
     </footer>
 
+
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // Gemini API configuration
+        const API_KEY = ""; // Leave as-is, Canvas will provide at runtime.
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        if (menuBtn && mobileMenu) {
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
             menuBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
-        }
-        
-        // AI Pipeline accordion logic
-        const stages = document.querySelectorAll('.ai-pipeline-stage');
-        stages.forEach(stage => {
-            stage.addEventListener('click', () => {
-                // Get the ID of the corresponding details block
-                const detailsId = 'details-' + stage.id.split('-')[1];
-                const details = document.getElementById(detailsId);
-                
-                // Close all other details
-                document.querySelectorAll('.ai-details.open').forEach(openDetails => {
-                    if (openDetails !== details) {
-                        openDetails.classList.remove('open');
-                    }
-                });
-                
-                // Toggle the clicked details block
-                if (details) {
-                    details.classList.toggle('open');
-                }
-            });
-        });
 
-        // Chart.js data and rendering logic
-        document.addEventListener('DOMContentLoaded', () => {
-            // Actuator Chart
+            // --- Text-to-Speech (Telugu Summary) Logic - REMOVED ---
+            // All related elements and functions for text-to-speech have been removed.
+
+            // --- Chart.js Initialization (Existing Logic) ---
             const actuatorCtx = document.getElementById('actuatorChart').getContext('2d');
             new Chart(actuatorCtx, {
                 type: 'bar',
                 data: {
                     labels: ['Hydraulic Arm', 'Stabilizer Actuators'],
                     datasets: [{
-                        label: 'Max Force (Newtons)',
+                        label: 'Force (Newtons)',
                         data: [1500, 900],
                         backgroundColor: [
-                            '#F97316', // orange-500
-                            '#44403C'  // stone-700
+                            'rgba(249, 115, 22, 0.7)', /* orange-500 */
+                            'rgba(68, 64, 60, 0.7)'   /* stone-700 */
                         ],
                         borderColor: [
-                            '#EA580C',
-                            '#292524'
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(68, 64, 60, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -559,39 +550,37 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Maximum Force Output', color: '#44403C' }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Force (Newtons)'
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
+                            title: { display: true, text: 'Force (N)', color: '#78716C' },
+                            ticks: { color: '#78716C' },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
                         },
-                        title: {
-                            display: false
+                        x: {
+                            ticks: { color: '#78716C' },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
                         }
                     }
                 }
             });
 
-            // Power Distribution Chart
             const powerCtx = document.getElementById('powerChart').getContext('2d');
             new Chart(powerCtx, {
-                type: 'pie',
+                type: 'doughnut',
                 data: {
-                    labels: ['Drive Motors (24V)', 'Hydraulic System (24V)', 'Sensing & AI (12V)', 'Microcontrollers & Comms (5V/3.3V)'],
+                    labels: ['24V (Motors/Arm)', '12V (Control)', '5V (Microcontrollers)'],
                     datasets: [{
-                        data: [45, 30, 15, 10], // Example power distribution percentages
+                        label: 'Power Distribution',
+                        data: [70, 20, 10], // Representative percentages
                         backgroundColor: [
-                            '#F97316', // orange-500
-                            '#FB923C', // orange-400
-                            '#78716C', // stone-500
-                            '#A8A29E'  // stone-400
+                            'rgba(249, 115, 22, 0.8)', /* orange-500 */
+                            'rgba(68, 64, 60, 0.8)',   /* stone-700 */
+                            'rgba(120, 113, 108, 0.8)' /* stone-500 */
                         ],
                         hoverOffset: 4
                     }]
@@ -600,126 +589,142 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
+                        legend: { 
                             position: 'bottom',
+                            labels: {
+                                color: '#78716C'
+                            }
                         },
-                        title: {
-                            display: false
+                        title: { display: true, text: 'Main Bus (24V) Step-Down Allocation', color: '#44403C' }
+                    }
+                }
+            });
+
+            const lightLoadData = {
+                labels: Array.from({length: 15}, (_, i) => `${i}h`),
+                datasets: [{
+                    label: 'Battery % (Light Load)',
+                    data: [100, 94, 88, 82, 76, 70, 64, 58, 52, 46, 40, 34, 28, 22, 16],
+                    borderColor: '#F97316', /* orange-500 */
+                    backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            };
+
+            const heavyLoadData = {
+                labels: Array.from({length: 5}, (_, i) => `${i}h`),
+                datasets: [{
+                    label: 'Battery % (Heavy Load)',
+                    data: [100, 78, 56, 34, 12],
+                    borderColor: '#44403C', /* stone-700 */
+                    backgroundColor: 'rgba(68, 64, 60, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            };
+
+            const batteryCtx = document.getElementById('batteryChart').getContext('2d');
+            const batteryChart = new Chart(batteryCtx, {
+                type: 'line',
+                data: lightLoadData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Estimated Runtime', color: '#44403C' }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: 'Battery Charge (%)', color: '#78716C' },
+                            ticks: { color: '#78716C' },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Time (Hours)', color: '#78716C' },
+                            ticks: { color: '#78716C' },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
                         }
                     }
                 }
             });
 
-            // Battery Performance Chart and Buttons
-            const batteryCtx = document.getElementById('batteryChart').getContext('2d');
-            let batteryChart = null;
-
-            const lightLoadData = [14, 13, 12, 10, 8, 6, 4, 2, 0];
-            const heavyLoadData = [14, 10, 7, 5, 3, 1.5, 0];
-
-            const createBatteryChart = (data, label, color) => {
-                if (batteryChart) {
-                    batteryChart.destroy();
-                }
-                
-                const labels = Array.from({length: data.length}, (_, i) => `${i * 2} hrs`);
-
-                batteryChart = new Chart(batteryCtx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Estimated Hours Remaining',
-                            data: data,
-                            borderColor: color,
-                            backgroundColor: color + '33', // Lighter shade for fill
-                            fill: true,
-                            tension: 0.3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Battery Life (Hours)'
-                                },
-                                max: 15
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Time Elapsed (Hours)'
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-            };
-
-            // Initialize chart to Light Load
-            createBatteryChart(lightLoadData, 'Light Load', '#F97316');
-            document.getElementById('lightLoadBtn').classList.add('btn-primary');
-            document.getElementById('heavyLoadBtn').classList.remove('btn-primary');
-            document.getElementById('heavyLoadBtn').classList.add('btn-secondary');
-
             document.getElementById('lightLoadBtn').addEventListener('click', () => {
-                createBatteryChart(lightLoadData, 'Light Load', '#F97316');
-                document.getElementById('lightLoadBtn').classList.add('btn-primary');
-                document.getElementById('lightLoadBtn').classList.remove('btn-secondary');
-                document.getElementById('heavyLoadBtn').classList.remove('btn-primary');
-                document.getElementById('heavyLoadBtn').classList.add('btn-secondary');
+                batteryChart.data = lightLoadData;
+                batteryChart.update();
             });
 
             document.getElementById('heavyLoadBtn').addEventListener('click', () => {
-                createBatteryChart(heavyLoadData, 'Heavy Load', '#44403C');
-                document.getElementById('heavyLoadBtn').classList.add('btn-primary');
-                document.getElementById('heavyLoadBtn').classList.remove('btn-secondary');
-                document.getElementById('lightLoadBtn').classList.remove('btn-primary');
-                document.getElementById('lightLoadBtn').classList.add('btn-secondary');
+                batteryChart.data = heavyLoadData;
+                batteryChart.update();
+            });
+            
+            const stages = {
+                perception: document.getElementById('stage-perception'),
+                language: document.getElementById('stage-language')
+            };
+            const details = {
+                perception: document.getElementById('details-perception'),
+                language: document.getElementById('details-language')
+            };
+
+            Object.keys(stages).forEach(key => {
+                stages[key].addEventListener('click', () => {
+                    const detailEl = details[key];
+                    const is_open = detailEl.classList.contains('open');
+                    
+                    Object.values(details).forEach(d => d.classList.remove('open'));
+
+                    if (!is_open) {
+                       detailEl.classList.add('open');
+                    }
+                });
             });
 
-            // Component Table Data and Logic
-            const componentData = [
-                { name: 'NVIDIA Jetson Orin NX', qty: 1, price: 55000, total: 55000, description: 'AI Processing Unit for Perception and Logic.' },
-                { name: 'LiDAR Sensor (YDLIDAR G4)', qty: 1, price: 18000, total: 18000, description: '360° Laser Scanner for SLAM and obstacle avoidance.' },
-                { name: '4K Camera Module (USB 3.0)', qty: 1, price: 4500, total: 4500, description: 'High-resolution vision for YOLOv8 object detection.' },
-                { name: 'Hydraulic Linear Actuator (1500N)', qty: 1, price: 12000, total: 12000, description: 'Main lifting arm, 100 kg payload capacity.' },
-                { name: 'Dynamic Stabilizer Actuators (900N)', qty: 4, price: 5000, total: 20000, description: 'Used for active load balancing and stability.' },
-                { name: 'Brushless DC Motors (250W)', qty: 4, price: 3500, total: 14000, description: 'High-torque motors for tracked chassis mobility.' },
-                { name: 'LiFePO₄ Battery Pack (24V 150Ah)', qty: 1, price: 40000, total: 40000, description: 'High-capacity, safe power source for extended runtime.' },
-                { name: 'Custom PDB/PCB (4-layer)', qty: 1, price: 8000, total: 8000, description: 'Power Distribution and main electronics board.' },
-                { name: 'STM32 Microcontrollers', qty: 2, price: 1500, total: 3000, description: 'Real-time motor control and low-latency I/O.' },
-                { name: 'Custom Tracked Chassis Assembly', qty: 1, price: 25000, total: 25000, description: 'Aluminum base, tracks, and mechanical structure.' },
+            // Component Data and Table Logic
+            const components = [
+                { name: "Jetson Orin NX 16GB", qty: 1, price: 60000, total: 60000, description: "AI computing unit with 100+ TOPS" },
+                { name: "IZI One Lite 4K Camera", qty: 1, price: 6000, total: 6000, description: "Main object detection camera" },
+                { name: "Angelite 1080p Autofocus Camera", qty: 1, price: 2600, total: 2600, description: "OCR & backup vision" },
+                { name: "FDUCE M160 Microphone", qty: 1, price: 1600, total: 1600, description: "Voice assistant mic" },
+                { name: "RPLIDAR A1", qty: 1, price: 8000, total: 8000, description: "For SLAM/navigation" },
+                { name: "9DOF IMU Sensor", qty: 1, price: 1200, total: 1200, description: "Orientation/stability tracking" },
+                { name: "Planetary Brushless Gear Motor (9.55Nm)", qty: 4, price: 8000, total: 32000, description: "For tank drive movement" },
+                { name: "Custom CNC Tank Wheels", qty: 4, price: 1500, total: 6000, description: "Wheel system with high load" },
+                { name: "3D Printed Tank Belts", qty: 2, price: 1000, total: 2000, description: "Belt-based traction" },
+                { name: "Hydraulic Linear Actuator (1500N, Arm)", qty: 1, price: 5500, total: 5500, description: "Main lifting actuator" },
+                { name: "900N Linear Actuators (Stabilizers)", qty: 4, price: 3200, total: 12800, description: "Bottom stabilizers" },
+                { name: "LiFePO4 Battery 24V 150Ah (custom)", qty: 1, price: 6750, total: 6750, description: "Power for 12hr+ runtime" },
+                { name: "Smart BMS with GPIO", qty: 1, price: 3000, total: 3000, description: "Battery safety system" },
+                { name: "60V to 24V Buck Converter", qty: 1, price: 1500, total: 1500, description: "Motor voltage regulation (updated to 24V system)" },
+                { name: "24V to 5V/12V Converters", qty: 2, price: 1000, total: 2000, description: "For logic & sensors" },
+                { name: "STM32 Microcontroller", qty: 1, price: 1200, total: 1200, description: "Sensor interfacing" },
+                { name: "ESP32 Dev Board", qty: 1, price: 900, total: 900, description: "Wi-Fi + BT logic" },
+                { name: "Custom 4-Layer PCB", qty: 1, price: 2500, total: 2500, description: "Core board for power and logic" },
+                { name: "INA219/ACS712 Current Sensors", qty: 2, price: 600, total: 1200, description: "Power monitoring" },
+                { name: "IP-rated Cables & Connectors", qty: 1, price: 1500, total: 1500, description: "Waterproof & rugged wiring" },
+                { name: "Aluminum Chassis Frame", qty: 1, price: 8000, total: 8000, description: "Supports heavy components" },
+                { name: "Voice Output Module (Speaker)", qty: 1, price: 500, total: 500, description: "For TTS responses" },
+                { name: "Misc Hardware (Fasteners, Hinges, etc.)", qty: 1, price: 2000, total: 2000, description: "Assembly items" }
             ];
 
             const componentTableBody = document.getElementById('componentTableBody');
-            const totalCostSpan = document.getElementById('totalCost');
             const componentSearch = document.getElementById('componentSearch');
+            const totalCostSpan = document.getElementById('totalCost');
 
-            const renderComponents = (filterText = '') => {
+            function renderComponents(filterText = '') {
                 componentTableBody.innerHTML = '';
                 let currentTotalCost = 0;
-                
-                const filteredComponents = componentData.filter(item => 
+                const filteredComponents = components.filter(item => 
                     item.name.toLowerCase().includes(filterText.toLowerCase()) ||
                     item.description.toLowerCase().includes(filterText.toLowerCase())
                 );
 
                 filteredComponents.forEach(item => {
                     const row = document.createElement('tr');
-                    row.className = 'table-row-hover';
+                    row.className = 'hover:bg-stone-50';
                     row.innerHTML = `
                         <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-stone-900">${item.name}</td>
                         <td class="px-4 py-3 whitespace-nowrap text-sm text-stone-700">${item.qty}</td>
